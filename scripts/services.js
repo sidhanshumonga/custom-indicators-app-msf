@@ -67,7 +67,7 @@ var _getAllOus = function () {
         type: "GET",
         dataType: "json",
         contentType: "application/json",
-        url: "../api/organisationUnits/oo6xFWZ9n1y.json?level=3",
+        url: "../../organisationUnits/oo6xFWZ9n1y.json?level=3&fields=[name,id]",
         success: function (data) {
             def.resolve(data);
         }

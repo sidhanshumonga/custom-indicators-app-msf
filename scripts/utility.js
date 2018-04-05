@@ -200,8 +200,20 @@ var get12MonthsBeforeDate = function (d) {
     return _12monthsbeforedate;
 };
 
-//function to get ou/period combo rule
-var getOuPeriodLoop = function (ouarray, periodarray) {
+//function to get ou/period combo rule quaterly
+var getOuPeriodLoopQuarterly = function (ouarray, periodarray) {
+    var array = [];
+    for (var i = 0; i < ouarray.length; i++) {
+        for (var a = 0; a < periodarray.length; a++) {
+            array.push(ouarray[i] + "/" + periodarray[a]);
+        }
+    }
+    return array;
+};
+
+
+//function to get ou/period combo rule monthly
+var getOuPeriodLoopMonthly = function (ouarray, periodarray) {
     var array = [];
     for (var i = 0; i < ouarray.length; i++) {
         for (var a = 0; a < periodarray.length; a++) {

@@ -63,6 +63,7 @@
         
         
             <link type="text/css" rel="stylesheet" media="screen" href="styles/style.css">
+            <link type="text/css" rel="stylesheet" media="screen" href="styles/custom-style.css">
         
             <script type="text/javascript" src="scripts/main.js"></script>
             <script type="text/javascript" src="scripts/services.js"></script>
@@ -76,10 +77,11 @@
     </head>
     <body>
             <d2-header-bar></d2-header-bar>
-        <div>
+            <div class="loading" id="loader"><p id='loadtext'></p></div>
+        <div><br><br>
             <button id='submit' class='btn btn-default' onclick='execute();'>submit</button>
         </div>
-        <div>
+        <div><br><br>
             <table class='table table-hover table-bordered table-striped reporttable'>
                 <thead>
                     <tr>
