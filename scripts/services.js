@@ -25,7 +25,7 @@ var _getAllEventsOfTei = function (tei) {
         type: "GET",
         dataType: "json",
         contentType: "application/json",
-        url: '../../events.json?skipPaging=true&program=VCuHIFtJJSv&trackedEntityInstance=' + tei,
+        url: '../../events.json?skipPaging=true&program=VCuHIFtJJSv&order=eventDate:ASC&trackedEntityInstance=' + tei,
         success: function (data) {
             def.resolve(data);
         }

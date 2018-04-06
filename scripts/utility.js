@@ -5,7 +5,7 @@
 
 
 //getting enddate of quarter from today date.
-var getQuaterEndDate = function (d) {
+var getQuarterEndDate = function (d) {
     var q = d.substring(5, 7);
     var y = d.substring(0, 4);
     if (q == "01" || q == "02" || q == "03") {

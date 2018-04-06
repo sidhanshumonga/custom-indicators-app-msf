@@ -138,5 +138,5 @@
 	margin : auto;
 }
 #submit {
-	margin: auto;
+	margin: auto !important;
 }

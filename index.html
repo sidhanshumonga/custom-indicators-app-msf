@@ -2,6 +2,9 @@
     2018-05-04 -->
 <html>
     <head>
+        <title>
+            Custom Indicator App
+        </title>
             <script  type="text/javascript" ></script>
             <script type="text/javascript" src="scripts/lib/jQuery/jquery.min.js"></script>
             <script type="text/javascript" src="scripts/lib/jQuery/ui/jquery-ui.min.js"></script>
@@ -68,6 +71,7 @@
             <script type="text/javascript" src="scripts/main.js"></script>
             <script type="text/javascript" src="scripts/services.js"></script>
             <script type="text/javascript" src="scripts/utility.js"></script>
+            <script type="text/javascript" src="scripts/activeatendreport.js"></script>
         
 <style>
     body{
@@ -79,7 +83,7 @@
             <d2-header-bar></d2-header-bar>
             <div class="loading" id="loader"><p id='loadtext'></p></div>
         <div><br><br>
-            <button id='submit' class='btn btn-default' onclick='execute();'>submit</button>
+            <center><button id='submit' class='btn btn-default' onclick='execute();'>submit</button></center>
         </div>
         <div><br><br>
             <table class='table table-hover table-bordered table-striped reporttable'>
@@ -89,6 +93,7 @@
                         <th>Orgunit name</th>
                         <th>Period</th>
                         <th>value</th>
+                        <th>Push Status</th>
                     </tr>
                 </thead>
             </table>
