@@ -5,7 +5,7 @@ var teiEventsMap = [];
 var enrollmentsMapOuDate = [];
 var ounames = [];
 var ouids = [];
-var today = '2018-05-04';
+var today = '2018-03-31';
 var qenddate;
 var menddate;
 var quartersPeriod = '';
@@ -54,6 +54,7 @@ var getLoopArray = function () {
                 monthsPeriod = getMonthsPeriod(menddate);
                 loopArrayQuarterly = getOuPeriodLoopQuarterly(ouids, quartersPeriod);
                 loopArrayMonthly = getOuPeriodLoopMonthly(ouids, monthsPeriod);
+                //console.log(loopArrayQuarterly);
                 callingEnrollments(loopArrayQuarterly, 0);
             }
         }
@@ -62,8 +63,8 @@ var getLoopArray = function () {
 
 var callingEnrollments = function (array, j) {
 
-    if (j >= array.length - 1) {
-        console.log(enrollmentsMapOuDate);
+    if (j >= array.length) {
+       // console.log(enrollmentsMapOuDate);
         enrollmentLoop(enrollmentsMapOuDate);
         document.getElementById('loader').style.display = 'none';
     }
@@ -87,7 +88,8 @@ var enrollmentLoop = function (array) {
             for (var h = 0; h < enrollments.length; h++) {
                 var tei = enrollments[h].trackedEntityInstance;
                 var events = teiEventsMap[tei];
-                activeatendreport(events, h, enrollments.length, p, o);
+            //    activeatendreport(events, h, enrollments.length, p, o);
+                creatinineclear(events, h, enrollments.length, p, o);
             }
         }
     }

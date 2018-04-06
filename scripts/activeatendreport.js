@@ -3,7 +3,8 @@ var totalEndevent = 0;
 var activeatendreport = function (events, a, len, p, ou) {
     var enddate = p;
     var active = true;
-    if(events !== undefined || events.length !== 0){
+    if(events !== undefined && events.length != 0){
+        console.log(events + ' ' + events.length);
         if (events[events.length - 1].programStage == 'Kr60c8j7vMe') {
             var date = events[events.length - 1].eventDate;
             var first = date.split('T')[0];
@@ -41,7 +42,7 @@ var pushfunctionR1 = function (value, quarter, selectedou) {
         type: 'post',
         dataType: 'json',
         contentType: "application/json",
-        url: '../api/dataValueSets',
+        url: '../../dataValueSets',
         data: JSON.stringify(dataValueSet),
         success: function (response) {
             console.log("values pushed for OU = " + selectedou + " and Period = " + quarter + "and value  = " + value);
