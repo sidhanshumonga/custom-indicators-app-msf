@@ -88,7 +88,7 @@ var enrollmentLoop = function (array) {
             for (var h = 0; h < enrollments.length; h++) {
                 var tei = enrollments[h].trackedEntityInstance;
                 var events = teiEventsMap[tei];
-            //    activeatendreport(events, h, enrollments.length, p, o);
+            activeatendreport(events, h, enrollments.length, p, o);
                 creatinineclear(events, h, enrollments.length, p, o);
             }
         }

@@ -4,7 +4,7 @@ var activeatendreport = function (events, a, len, p, ou) {
     var enddate = p;
     var active = true;
     if(events !== undefined && events.length != 0){
-        console.log(events + ' ' + events.length);
+     //   console.log(events + ' ' + events.length);
         if (events[events.length - 1].programStage == 'Kr60c8j7vMe') {
             var date = events[events.length - 1].eventDate;
             var first = date.split('T')[0];

@@ -74,3 +74,17 @@ var _getAllOus = function () {
     });
     return def;
 };
+
+var _getGender = function (tei) {
+    var def = $.Deferred();
+    $.ajax({
+        type: "GET",
+        dataType: "json",
+        contentType: "application/json",
+        url: "../../trackedEntityInstances/" + tei + ".json?fields=attributes",
+        success: function (data) {
+            def.resolve(data);
+        }
+    });
+    return def;
+};

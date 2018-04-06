@@ -1,19 +1,12 @@
 var getGender = function (tei) {
     var value = '';
-    $.ajax({
-        async: false,
-        type: 'GET',
-        dataType: 'json',
-        url: "../api/trackedEntityInstances/" + tei + ".json?fields=attributes",
-        success: function (res) {
-            for (var i = 0; i < res.attributes.length && value == ''; i++) {
-                if (res.attributes[i].displayName == 'Sex') {
-                    value = res.attributes[i].value;
-                }
+    _getGender(tei).then(function(res){
+        for (var i = 0; i < res.attributes.length && value == ''; i++) {
+            if (res.attributes[i].displayName == 'Sex') {
+                value = res.attributes[i].value;
             }
         }
     });
-
     return value;
 };
 
@@ -31,26 +24,26 @@ var getCrtValue = function (gender, curValA, curValCrt, curValW) {
 var crt1 = 0, crt2 = 0, crt3 = 0, crt4 = 0, crt5 = 0;
 var totalCrt = 0;
 
-var creatinineclear = function (events, a, len, p, ou) {
+var creatinineclear = function (events, aa, len, p, ou) {
     var enddate = p;
     var startdate = getQuarterStartDate(p);
     var active = false;
     var indexx = 0;
     var EventAttr = "";
-    if (events.length == 0) {
-        return;
-    }
-    if (events.programStage == "Kr60c8j7vMe") {
-        var date = events[events.length-1].eventDate;
-        var first = date.split('T')[0];
-        var expireDate = new Date(first);
-        if (expireDate >= new Date(startdate)) {
-            active = true;
-            indexx = events.length - 2;
+    if (events !== undefined && events.length != 0) {
+
+        if (events.programStage == "Kr60c8j7vMe") {
+            var date = events[events.length - 1].eventDate;
+            var first = date.split('T')[0];
+            var expireDate = new Date(first);
+            if (expireDate >= new Date(startdate)) {
+                active = true;
+                indexx = events.length - 2;
+            }
         }
-    }
-    else {
-        active = true;
+        else {
+            active = true;
+        }
     }
 
     var elementFound = false;
@@ -62,7 +55,7 @@ var creatinineclear = function (events, a, len, p, ou) {
         var date = events[indexx].eventDate;
         var first = date.split('T')[0];
         var expireDate = new Date(first);
-     //   var startdate = getStartDate(enddate);
+        //   var startdate = getStartDate(enddate);
         var tei = events[indexx].trackedEntityInstance;
         if (new Date(enddate) >= expireDate && expireDate >= new Date(startdate)) {
             var currentEventAttr1 = events[indexx].dataValues;
@@ -71,12 +64,12 @@ var creatinineclear = function (events, a, len, p, ou) {
                     applicable = true;
                 }
             }
-            for (var b = 0; b < events.length; b++) {
+            for (var b = events.length - 1; b >= 0; b--) {
                 var currentEventAttr = events[b].dataValues;
                 for (var j = 0; j < currentEventAttr.length; j++) {
                     if ((currentEventAttr[j].dataElement == "bxZbTKBLYGL" || currentEventAttr[j].dataElement == "KEVxrQoxfJ9") && curValCrt < 0) { //&& (currentEventAttr[j].value > 0 )) { 
                         curValCrt = parseFloat(currentEventAttr[j].value).toFixed(2);
-                       
+
                     }
                     if ((currentEventAttr[j].dataElement == "Pp1cKHJWH2W") && curValW < 0) {
                         curValW = parseInt(currentEventAttr[j].value).toFixed(2);
@@ -89,7 +82,8 @@ var creatinineclear = function (events, a, len, p, ou) {
                 }
             }
 
-
+        }
+    }
             if (curValCrt > 0 && curValW > 0 && applicable) {
                 totalCrt++;
                 var gender = getGender(tei);
@@ -101,13 +95,13 @@ var creatinineclear = function (events, a, len, p, ou) {
                 if (crtvalue < 30 && crtvalue >= 15) { crt4++; }
                 if (crtvalue < 15) { crt5++; }
             }
-            if (a >= len - 1) {
+      
+    
+            if (aa >= len - 1) {
                 var crtarray = [crt1, crt2, crt3, crt4, crt5, totalCrt];
                 pushfunctionR2(crtarray, getQuarterToPush(p), ou);
             }
 
-        }
-    }
 };
 
 var pushfunctionR2 = function (value, quarter, selectedou) {
@@ -164,7 +158,7 @@ var pushfunctionR2 = function (value, quarter, selectedou) {
         type: 'post',
         dataType: 'json',
         contentType: "application/json",
-        url: '../api/dataValueSets',
+        url: '../../dataValueSets',
         data: JSON.stringify(dataValueSet),
         success: function (response) {
             console.log("Successfully pushed for OU = " + selectedou + " and Period = " + quarter + " value " + value);
