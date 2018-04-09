@@ -99,7 +99,7 @@ var enrollmentLoop = function (array) {
                 copdAndAsthama(events, h, enrollments.length, p, o);
                 cvstatin(events, h, enrollments.length, p, o);
                 cvdprefunction(events, h, enrollments.length, p, o);
-                
+                dbWithHba1c(events, h, enrollments.length, p, o);
             }
         }
     }
