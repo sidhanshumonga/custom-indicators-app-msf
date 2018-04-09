@@ -1,6 +1,13 @@
-var totalEndevent = 0;
+// created by Sidhanshu Monga
+// 2018-04-09
+
+//variables using
+var activeAtTheEndPAtients = 0;
+
 //first report -  need to be shift in another js
 var activeatendreport = function (events, a, len, p, ou) {
+    var quarterToPush = getQuarterToPush(p);
+
     var enddate = p;
     var active = true;
     if(events !== undefined && events.length != 0){
@@ -16,9 +23,9 @@ var activeatendreport = function (events, a, len, p, ou) {
     }
    
 
-    if (active) { totalEndevent++; }
+    if (active) { activeAtTheEndPAtients++; }
     if (a >= len - 1) {
-        pushfunctionR1(totalEndevent, getQuarterToPush(p), ou);
+        pushfunctionR1(activeAtTheEndPAtients, quarterToPush, ou);
     }
 
 };
@@ -48,21 +55,21 @@ var pushfunctionR1 = function (value, quarter, selectedou) {
             console.log("values pushed for OU = " + selectedou + " and Period = " + quarter + "and value  = " + value);
             var row = '<tr><td>Active at end of RP</td><td>' + ounames[selectedou] + '</td><td>' + quarter + '</td><td>' + value + '</td><td>Success</td></tr>'
             $('.reporttable').append(row);
-            totalEndevent = 0;
+            activeAtTheEndPAtients = 0;
         },
         warning: function (response) {
             console.log("Warning! for OU = " + selectedou + " and Period = " + quarter);
             var row = '<tr><td>Active at end of RP</td><td>' + ounames[selectedou] + '</td><td>' + quarter + '</td><td>' + value + '</td><td>warning</td></tr>'
             
             $('.reporttable').append(row);
-            totalEndevent = 0;
+            activeAtTheEndPAtients = 0;
         },
         error: function (response) {
             console.log("ERROR for OU = " + selectedou + " and Period = " + quarter);
             var row = '<tr><td>Active at end of RP</td><td>' + ounames[selectedou] + '</td><td>' + quarter + '</td><td>' + value + '</td><td>Error</td></tr>'
             
             $('.reporttable').append(row);
-            totalEndevent = 0;
+            activeAtTheEndPAtients = 0;
         }
     });
 };

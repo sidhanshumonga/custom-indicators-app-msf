@@ -18,6 +18,7 @@ var loopArrayMonthly = '';
 var execute = function () {
     _getAllEnrollments().then(function (data) {
         document.getElementById('loader').style.display = 'block';
+        document.getElementById('loadtext').innerHTML = loadingText;
         var i = 0;
         getHashMap(data.enrollments, i);
     });
@@ -27,7 +28,8 @@ var execute = function () {
 var getHashMap = function (enrollments, i) {
     var tei = enrollments[i].trackedEntityInstance;
     var perc = (i / (enrollments.length - 1)) * 100;
-    document.getElementById('loadtext').innerHTML = (perc).toFixed(1) + '% data loaded! Please wait!';
+    loadingText = (perc).toFixed(1) + '% data loaded! Please wait!';
+    displayText(loadingText);
     if (i >= enrollments.length - 1) {
         getLoopArray();
     }
@@ -44,7 +46,8 @@ var getLoopArray = function () {
     _getAllOus().then(function (data) {
 
         for (var j = 0; j < data.organisationUnits.length; j++) {
-            document.getElementById('loadtext').innerHTML = 'loading organisation units...';
+            loadingText = 'loading organisation units...';
+            displayText(loadingText);
             ounames[data.organisationUnits[j].id] = data.organisationUnits[j].name;
             ouids[j] = data.organisationUnits[j].id;
             if (j == data.organisationUnits.length - 1) {
@@ -69,7 +72,8 @@ var callingEnrollments = function (array, j) {
         document.getElementById('loader').style.display = 'none';
     }
     else {
-        document.getElementById('loadtext').innerHTML = 'loading enrollments from all organisation units...';
+        loadingText = 'loading enrollments from all organisation units...';
+        displayText(loadingText);        
         var ou = array[j].split('/')[0];
         var date = array[j].split('/')[1];
         _getAllEnrollmentsOfOu(ou, date).then(function (data) {
@@ -85,11 +89,17 @@ var enrollmentLoop = function (array) {
             var p = array[k][1];
             var o = array[k][0];
             var enrollments = array[k][2].enrollments;
+            loadingText = 'calculating data of ' +ounames[o] + 'for period' + getQuarterToPush(p);
+            displayText(loadingText); 
             for (var h = 0; h < enrollments.length; h++) {
                 var tei = enrollments[h].trackedEntityInstance;
                 var events = teiEventsMap[tei];
-            activeatendreport(events, h, enrollments.length, p, o);
+                activeatendreport(events, h, enrollments.length, p, o);
                 creatinineclear(events, h, enrollments.length, p, o);
+                copdAndAsthama(events, h, enrollments.length, p, o);
+                cvstatin(events, h, enrollments.length, p, o);
+                cvdprefunction(events, h, enrollments.length, p, o);
+                
             }
         }
     }

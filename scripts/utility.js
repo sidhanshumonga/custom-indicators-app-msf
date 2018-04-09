@@ -222,3 +222,11 @@ var getOuPeriodLoopMonthly = function (ouarray, periodarray) {
     }
     return array;
 };
+
+var displayText = function(text){
+    document.getElementById('loadtext').innerHTML = text;
+};
+
+var getProperDate = function (d) {
+    return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+}

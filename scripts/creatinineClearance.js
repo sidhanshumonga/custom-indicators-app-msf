@@ -1,3 +1,15 @@
+// created by Sidhanshu Monga
+// 2018-04-09
+
+//variables using
+var crtMoreThan90 = 0;
+var crtMoreThan60LessThan90 = 0;
+var crtMoreThan30LessThan60 = 0;
+var crtMoreThan15LessThan30 = 0;
+var crtLessThan15 = 0;
+var totalPatientsWithCRT = 0;
+
+
 var getGender = function (tei) {
     var value = '';
     _getGender(tei).then(function(res){
@@ -21,10 +33,11 @@ var getCrtValue = function (gender, curValA, curValCrt, curValW) {
     return crtvalue;
 };
 
-var crt1 = 0, crt2 = 0, crt3 = 0, crt4 = 0, crt5 = 0;
-var totalCrt = 0;
+
 
 var creatinineclear = function (events, aa, len, p, ou) {
+    var quarterToPush = getQuarterToPush(p);
+   
     var enddate = p;
     var startdate = getQuarterStartDate(p);
     var active = false;
@@ -32,7 +45,7 @@ var creatinineclear = function (events, aa, len, p, ou) {
     var EventAttr = "";
     if (events !== undefined && events.length != 0) {
 
-        if (events.programStage == "Kr60c8j7vMe") {
+        if (events[events.length - 1].programStage == "Kr60c8j7vMe") {
             var date = events[events.length - 1].eventDate;
             var first = date.split('T')[0];
             var expireDate = new Date(first);
@@ -43,6 +56,7 @@ var creatinineclear = function (events, aa, len, p, ou) {
         }
         else {
             active = true;
+            indexx = events.length - 1;
         }
     }
 
@@ -85,21 +99,21 @@ var creatinineclear = function (events, aa, len, p, ou) {
         }
     }
             if (curValCrt > 0 && curValW > 0 && applicable) {
-                totalCrt++;
+                totalPatientsWithCRT++;
                 var gender = getGender(tei);
                 var crtvalue = getCrtValue(gender, curValA, curValCrt, curValW);
 
-                if (crtvalue >= 90) { crt1++; }
-                if (crtvalue < 90 && crtvalue >= 60) { crt2++; }
-                if (crtvalue < 60 && crtvalue >= 30) { crt3++; }
-                if (crtvalue < 30 && crtvalue >= 15) { crt4++; }
-                if (crtvalue < 15) { crt5++; }
+                if (crtvalue >= 90) { crtMoreThan90++; }
+                if (crtvalue < 90 && crtvalue >= 60) { crtMoreThan60LessThan90++; }
+                if (crtvalue < 60 && crtvalue >= 30) { crtMoreThan30LessThan60++; }
+                if (crtvalue < 30 && crtvalue >= 15) { crtMoreThan15LessThan30++; }
+                if (crtvalue < 15) { crtLessThan15++; }
             }
       
     
             if (aa >= len - 1) {
-                var crtarray = [crt1, crt2, crt3, crt4, crt5, totalCrt];
-                pushfunctionR2(crtarray, getQuarterToPush(p), ou);
+                var crtarray = [crtMoreThan90, crtMoreThan60LessThan90, crtMoreThan30LessThan60, crtMoreThan15LessThan30, crtLessThan15, totalPatientsWithCRT];
+                pushfunctionR2(crtarray, quarterToPush, ou);
             }
 
 };
@@ -164,22 +178,22 @@ var pushfunctionR2 = function (value, quarter, selectedou) {
             console.log("Successfully pushed for OU = " + selectedou + " and Period = " + quarter + " value " + value);
             var row = '<tr><td>Creatinine Clearance</td><td>' + ounames[selectedou] + '</td><td>' + quarter + '</td><td>' + value + '</td><td>Success</td></tr>'
             $('.reporttable').append(row);
-            crt1 = 0, crt2 = 0, crt3 = 0, crt4 = 0, crt5 = 0;
-            totalCrt = 0;
+            crtMoreThan90 = 0, crtMoreThan60LessThan90 = 0, crtMoreThan30LessThan60 = 0, crtMoreThan15LessThan30 = 0, crtLessThan15 = 0;
+            totalPatientsWithCRT = 0;
         },
         warning: function (response) {
             console.log("Warning! for OU = " + selectedou + " and Period = " + quarter);
             var row = '<tr><td>Creatinine Clearance</td><td>' + ounames[selectedou] + '</td><td>' + quarter + '</td><td>' + value + '</td><td>Warning</td></tr>'
             $('.reporttable').append(row);
-            crt1 = 0, crt2 = 0, crt3 = 0, crt4 = 0, crt5 = 0;
-            totalCrt = 0;
+            crtMoreThan90 = 0, crtMoreThan60LessThan90 = 0, crtMoreThan30LessThan60 = 0, crtMoreThan15LessThan30 = 0, crtLessThan15 = 0;
+            totalPatientsWithCRT = 0;
         },
         error: function (response) {
             console.log("ERROR for OU = " + selectedou + " and Period = " + quarter);
             var row = '<tr><td>Creatinine Clearance</td><td>' + ounames[selectedou] + '</td><td>' + quarter + '</td><td>' + value + '</td><td>Error</td></tr>'
             $('.reporttable').append(row);
-            crt1 = 0, crt2 = 0, crt3 = 0, crt4 = 0, crt5 = 0;
-            totalCrt = 0;
+            crtMoreThan90 = 0, crtMoreThan60LessThan90 = 0, crtMoreThan30LessThan60 = 0, crtMoreThan15LessThan30 = 0, crtLessThan15 = 0;
+            totalPatientsWithCRT = 0;
         }
     });
 };
