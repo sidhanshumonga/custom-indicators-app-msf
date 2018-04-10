@@ -99,3 +99,6 @@ var report9 = ["Number of perscribed antihypertensive medications during the rep
     "Total number of hypertensive patients taken more than 3 medicines",
     "Total number of hypertensive patients on therapy ≥12 months by the end of the reporting period",
     "Number of patients with latest Systolic BP recorded ≤140 AND latest Diastolic BP  ≤90mmHg on therapy ≥12 months by the end of the reporting",];
+
+var report10 = ["Active patients at end of reporting quarter who enrolled in same quarter last year-Calculated value_NCD",
+    "Patients enrolled in same quarter last year-Calculated value_NCD"];
