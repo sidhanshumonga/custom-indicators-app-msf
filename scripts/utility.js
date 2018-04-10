@@ -230,3 +230,7 @@ var displayText = function(text){
 var getProperDate = function (d) {
     return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
 }
+
+var displayValues = function(){
+    document.getElementById('myModal').style.display = 'block';
+};

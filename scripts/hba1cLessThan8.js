@@ -1,8 +1,13 @@
 // created by Sidhanshu Monga
-// 2018-04-09
+// 2018-04-10
 
 //variables using
-TotalHba1c = 0, TotalHba1cLessThan8 = 0, type1LessThan8 = 0, type1TotalHba1c = 0, type2LessThan8 = 0, type2TotalHba1c = 0;
+var TotalHba1c = 0;
+var TotalHba1cLessThan8 = 0;
+var type1LessThan8 = 0;
+var type1TotalHba1c = 0;
+var type2LessThan8 = 0;
+var type2TotalHba1c = 0;
 
 
 var hba1cLessThan8 = function (events, aa, len, p, ou) {

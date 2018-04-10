@@ -53,7 +53,7 @@ var pushfunctionR1 = function (value, quarter, selectedou) {
         data: JSON.stringify(dataValueSet),
         success: function (response) {
             console.log("values pushed for OU = " + selectedou + " and Period = " + quarter + "and value  = " + value);
-            var row = '<tr><td>Active at end of RP</td><td>' + ounames[selectedou] + '</td><td>' + quarter + '</td><td>' + value + '</td><td>Success</td></tr>'
+            var row = '<tr onclick="displayValues()"><td>Active at end of RP</td><td>' + ounames[selectedou] + '</td><td>' + quarter + '</td><td>' + value + '</td><td>Success</td></tr>'
             $('.reporttable').append(row);
             activeAtTheEndPAtients = 0;
         },

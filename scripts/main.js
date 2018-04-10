@@ -14,6 +14,18 @@ var monthsPeriod = '';
 var loopArrayQuarterly = '';
 var loopArrayMonthly = '';
 
+//popup box function
+
+window.onclick = function (event) {
+    var modal = document.getElementById('myModal');
+    var span = document.getElementsByClassName("close")[0];
+    if (event.target == modal || event.target == span) {
+        modal.style.display = "none";
+    }
+}
+
+
+// finished
 
 var execute = function () {
     _getAllEnrollments().then(function (data) {
@@ -67,13 +79,13 @@ var getLoopArray = function () {
 var callingEnrollments = function (array, j) {
 
     if (j >= array.length) {
-       // console.log(enrollmentsMapOuDate);
+        // console.log(enrollmentsMapOuDate);
         enrollmentLoop(enrollmentsMapOuDate);
         document.getElementById('loader').style.display = 'none';
     }
     else {
-        loadingText = 'loading enrollments from all organisation units...';
-        displayText(loadingText);        
+        loadingText = 'loading enrollments from all Orgunits...';
+        displayText(loadingText);
         var ou = array[j].split('/')[0];
         var date = array[j].split('/')[1];
         _getAllEnrollmentsOfOu(ou, date).then(function (data) {
@@ -89,8 +101,8 @@ var enrollmentLoop = function (array) {
             var p = array[k][1];
             var o = array[k][0];
             var enrollments = array[k][2].enrollments;
-            loadingText = 'calculating data of ' +ounames[o] + 'for period' + getQuarterToPush(p);
-            displayText(loadingText); 
+            loadingText = 'calculating data of ' + ounames[o] + 'for period' + getQuarterToPush(p);
+            displayText(loadingText);
             for (var h = 0; h < enrollments.length; h++) {
                 var tei = enrollments[h].trackedEntityInstance;
                 var events = teiEventsMap[tei];
@@ -101,6 +113,8 @@ var enrollmentLoop = function (array) {
                 cvdprefunction(events, h, enrollments.length, p, o);
                 dbWithHba1c(events, h, enrollments.length, p, o);
                 hba1cLessThan8(events, h, enrollments.length, p, o);
+                htnmeds(events, h, enrollments.length, p, o);
+                htncontrol(events, h, enrollments.length, p, o);
             }
         }
     }
