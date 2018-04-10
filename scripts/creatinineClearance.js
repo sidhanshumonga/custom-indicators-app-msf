@@ -176,21 +176,21 @@ var pushfunctionR2 = function (value, quarter, selectedou) {
         data: JSON.stringify(dataValueSet),
         success: function (response) {
             console.log("Successfully pushed for OU = " + selectedou + " and Period = " + quarter + " value " + value);
-            var row = '<tr><td>Creatinine Clearance</td><td>' + ounames[selectedou] + '</td><td>' + quarter + '</td><td>' + value + '</td><td>Success</td></tr>'
+            var row = '<tr onclick="displayValues(this);"><td>Creatinine Clearance</td><td>' + ounames[selectedou] + '</td><td>' + quarter + '</td><td>' + value + '</td><td>Success</td></tr>'
             $('.reporttable').append(row);
             crtMoreThan90 = 0, crtMoreThan60LessThan90 = 0, crtMoreThan30LessThan60 = 0, crtMoreThan15LessThan30 = 0, crtLessThan15 = 0;
             totalPatientsWithCRT = 0;
         },
         warning: function (response) {
             console.log("Warning! for OU = " + selectedou + " and Period = " + quarter);
-            var row = '<tr><td>Creatinine Clearance</td><td>' + ounames[selectedou] + '</td><td>' + quarter + '</td><td>' + value + '</td><td>Warning</td></tr>'
+            var row = '<tr onclick="displayValues(this);"><td>Creatinine Clearance</td><td>' + ounames[selectedou] + '</td><td>' + quarter + '</td><td>' + value + '</td><td>Warning</td></tr>'
             $('.reporttable').append(row);
             crtMoreThan90 = 0, crtMoreThan60LessThan90 = 0, crtMoreThan30LessThan60 = 0, crtMoreThan15LessThan30 = 0, crtLessThan15 = 0;
             totalPatientsWithCRT = 0;
         },
         error: function (response) {
             console.log("ERROR for OU = " + selectedou + " and Period = " + quarter);
-            var row = '<tr><td>Creatinine Clearance</td><td>' + ounames[selectedou] + '</td><td>' + quarter + '</td><td>' + value + '</td><td>Error</td></tr>'
+            var row = '<tr onclick="displayValues(this);"><td>Creatinine Clearance</td><td>' + ounames[selectedou] + '</td><td>' + quarter + '</td><td>' + value + '</td><td>Error</td></tr>'
             $('.reporttable').append(row);
             crtMoreThan90 = 0, crtMoreThan60LessThan90 = 0, crtMoreThan30LessThan60 = 0, crtMoreThan15LessThan30 = 0, crtLessThan15 = 0;
             totalPatientsWithCRT = 0;

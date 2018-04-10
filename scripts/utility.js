@@ -238,8 +238,11 @@ var displayValues = function (param) {
     var period = param.children[2].innerHTML;
     var values = param.children[3].innerHTML;
     var status = param.children[4].innerHTML;
-    var data = "<div id='popuptext'><h2>" + indicator + "</h2><br><h3>" + ou + "</h3><br><h3>" + period + "</h3><br><h3>" + values + "</h3><br><h3>" + status + "</h3></div>";
-    $('#popuptext').remove();
-    $('.modal-content').append(data);
+    var data = "<tr><td colspan='3'><b>" + indicator + "</b></td></tr>" +
+        "<tr><td><b>Organisation Unit</b></td><td><b>Period</b></td><td><b>Status</b></td></tr>" +
+        "<tr><td>" + ou + "</td><td>" + period + "</td><td>" + status + "</td></tr>";
+        $(".popupTable tbody").remove();
+        $(".popupTable tbody").detach();
+    $('.popupTable').append(data);
     document.getElementById('myModal').style.display = 'block';
 };
