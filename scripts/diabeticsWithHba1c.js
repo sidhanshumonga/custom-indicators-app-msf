@@ -6,7 +6,7 @@
 var totalDiabeticsPatientsSeen = 0, totalDiabeticsPatientsSeenWihHba1c = 0;
 
 var dbWithHba1c = function (events, aa, len, pp, ou) {
-  //  var quarterToPush = getQuarterToPush(p);
+    //  var quarterToPush = getQuarterToPush(p);
 
     var enddate = pp;
     var startdate = getQuarterStartDate(pp);
@@ -150,11 +150,11 @@ var dbWithHba1c = function (events, aa, len, pp, ou) {
             }
         }
     }
-    if (count == 1 && count2 == 1) { totalDiabeticsPatientsSeenWihHba1c++; }
-    if (count == 1 && count3 == 1) { totalDiabeticsPatientsSeen++; }
+    if (count == 1 && count2 == 1) { totalDiabeticsPatientsSeen++; }
+    if (count == 1 && count3 == 1) { totalDiabeticsPatientsSeenWihHba1c++; }
 
     if (aa >= len - 1) {
-        var dbarray = [totalDiabeticsPatientsSeen, totalDiabeticsPatientsSeenWihHba1c];
+        var dbarray = [totalDiabeticsPatientsSeenWihHba1c, totalDiabeticsPatientsSeen];
         pushfunctionR6(dbarray, getQuarterToPush(pp), ou);
     }
 
@@ -190,17 +190,17 @@ var pushfunctionR6 = function (value, quarter, selectedou) {
         data: JSON.stringify(dataValueSet),
         success: function (response) {
             console.log("Successfully pushed for OU = " + selectedou + " and Period = " + quarter + " value " + value);
-            var row = '<tr><td>Diabetics with HBA1C in last 6 months</td><td>' + ounames[selectedou] + '</td><td>' + quarter + '</td><td>' + value + '</td><td>Success</td></tr>'
+            var row = '<tr onclick="displayValues(this,6);"><td>Diabetics with HBA1C in last 6 months</td><td>' + ounames[selectedou] + '</td><td>' + quarter + '</td><td>' + value + '</td><td>Success</td></tr>'
             $('.reporttable').append(row);
             totalDiabeticsPatientsSeen = 0, totalDiabeticsPatientsSeenWihHba1c = 0;
         },
         warning: function (response) {
-            var row = '<tr><td>Diabetics with HBA1C in last 6 months</td><td>' + ounames[selectedou] + '</td><td>' + quarter + '</td><td>' + value + '</td><td>Warning</td></tr>'
+            var row = '<tr onclick="displayValues(this,6);"><td>Diabetics with HBA1C in last 6 months</td><td>' + ounames[selectedou] + '</td><td>' + quarter + '</td><td>' + value + '</td><td>Warning</td></tr>'
             $('.reporttable').append(row);
             console.log("Warning! for OU = " + selectedou + " and Period = " + quarter);
         },
         error: function (response) {
-            var row = '<tr><td>Diabetics with HBA1C in last 6 months</td><td>' + ounames[selectedou] + '</td><td>' + quarter + '</td><td>' + value + '</td><td>Error</td></tr>'
+            var row = '<tr onclick="displayValues(this,6);"><td>Diabetics with HBA1C in last 6 months</td><td>' + ounames[selectedou] + '</td><td>' + quarter + '</td><td>' + value + '</td><td>Error</td></tr>'
             $('.reporttable').append(row);
             console.log("ERROR for OU = " + selectedou + " and Period = " + quarter);
         }
