@@ -100,6 +100,7 @@ var enrollmentLoop = function (array) {
                 cvstatin(events, h, enrollments.length, p, o);
                 cvdprefunction(events, h, enrollments.length, p, o);
                 dbWithHba1c(events, h, enrollments.length, p, o);
+                hba1cLessThan8(events, h, enrollments.length, p, o);
             }
         }
     }
