@@ -223,7 +223,7 @@ var getOuPeriodLoopMonthly = function (ouarray, periodarray) {
     return array;
 };
 
-var displayText = function(text){
+var displayText = function (text) {
     document.getElementById('loadtext').innerHTML = text;
 };
 
@@ -231,6 +231,15 @@ var getProperDate = function (d) {
     return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
 }
 
-var displayValues = function(){
+var displayValues = function (param) {
+    console.log(param);
+    var indicator = param.children[0].innerHTML;
+    var ou = param.children[1].innerHTML;
+    var period = param.children[2].innerHTML;
+    var values = param.children[3].innerHTML;
+    var status = param.children[4].innerHTML;
+    var data = "<div id='popuptext'><h2>" + indicator + "</h2><br><h3>" + ou + "</h3><br><h3>" + period + "</h3><br><h3>" + values + "</h3><br><h3>" + status + "</h3></div>";
+    $('#popuptext').remove();
+    $('.modal-content').append(data);
     document.getElementById('myModal').style.display = 'block';
 };
