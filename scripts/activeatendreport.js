@@ -53,20 +53,20 @@ var pushfunctionR1 = function (value, quarter, selectedou) {
         data: JSON.stringify(dataValueSet),
         success: function (response) {
             console.log("values pushed for OU = " + selectedou + " and Period = " + quarter + "and value  = " + value);
-            var row = "<tr onclick='displayValues(this,1);'><td>Active at end of RP</td><td>" + ounames[selectedou] + "</td><td>Quarterly</td><td>" + quarter + "</td><td>" + value + "</td><td>Success</td></tr>"
+            var row = "<tr onclick='displayValues(this,1);'><td>Active at end of RP</td><td>" + ounames[selectedou] + "</td><td>Quarterly</td><td>" + quarter + "</td><td>" + value + "</td><td style='background-color:#d0e0b8'>Success</td></tr>"
             $('.reporttable').append(row);
             activeAtTheEndPAtients = 0;
         },
         warning: function (response) {
             console.log("Warning! for OU = " + selectedou + " and Period = " + quarter);
-            var row = '<tr onclick="displayValues(this,1);"><td>Active at end of RP</td><td>' + ounames[selectedou] + '</td><td>Quarterly</td><td>' + quarter + '</td><td>' + value + '</td><td>warning</td></tr>'
+            var row = '<tr onclick="displayValues(this,1);"><td>Active at end of RP</td><td>' + ounames[selectedou] + '</td><td>Quarterly</td><td>' + quarter + '</td><td>' + value + '</td><td style="background-color:#fff995">Warning</td></tr>'
 
             $('.reporttable').append(row);
             activeAtTheEndPAtients = 0;
         },
         error: function (response) {
             console.log("ERROR for OU = " + selectedou + " and Period = " + quarter);
-            var row = '<tr onclick="displayValues(this,1);"><td>Active at end of RP</td><td>' + ounames[selectedou] + '</td><td>Quarterly</td><td>' + quarter + '</td><td>' + value + '</td><td>Error</td></tr>'
+            var row = '<tr onclick="displayValues(this,1);"><td>Active at end of RP</td><td>' + ounames[selectedou] + '</td><td>Quarterly</td><td>' + quarter + '</td><td>' + value + '</td><td style="background-color:#f55b5b">Error</td></tr>'
 
             $('.reporttable').append(row);
             activeAtTheEndPAtients = 0;

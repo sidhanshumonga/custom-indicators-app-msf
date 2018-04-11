@@ -7,7 +7,7 @@ var enrollmentsMapOuDate2 = [];
 var monthlyenrollmentsMapOuDate = [];
 var ounames = [];
 var ouids = [];
-var today = "2018-03-31";
+var today = "2017-12-31";
 var qenddate;
 var menddate;
 var quartersPeriod = "";

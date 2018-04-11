@@ -180,19 +180,19 @@ var pushfunctionR13 = function (value, month, selectedou) {
         data: JSON.stringify(dataValueSet),
         success: function (response) {
             console.log("Successfully pushed for OU = " + selectedou + " and Period = " + month + " value " + value);
-            var row = '<tr onclick="displayValues(this,13);"><td>Active and LTFU report</td><td>' + ounames[selectedou] + '</td><td>Monthly</td><td>' + month + '</td><td>' + value + '</td><td>Success</td></tr>'
+            var row = '<tr onclick="displayValues(this,13);"><td>Active and LTFU report</td><td>' + ounames[selectedou] + '</td><td>Monthly</td><td>' + month + '</td><td>' + value + '</td><td style="background-color:#d0e0b8">Success</td></tr>'
             $('.reporttable').append(row);
             hasFollowup3mon = 0, activeatendevent = 0, LTFU12mon = 0, LTFU6mon = 0, activeatanyp = 0, activetotal = 0, exitpatients = 0;
         },
         warning: function (response) {
             console.log("Warning! for OU = " + selectedou + " and Period = " + month);
-            var row = '<tr onclick="displayValues(this,13);"><td>Active and LTFU report</td><td>' + ounames[selectedou] + '</td><td>Monthly</td><td>' + month + '</td><td>' + value + '</td><td>Warning</td></tr>'
+            var row = '<tr onclick="displayValues(this,13);"><td>Active and LTFU report</td><td>' + ounames[selectedou] + '</td><td>Monthly</td><td>' + month + '</td><td>' + value + '</td><td style="background-color:#fff995">Warning</td></tr>'
             $('.reporttable').append(row);
             hasFollowup3mon = 0, activeatendevent = 0, LTFU12mon = 0, LTFU6mon = 0, activeatanyp = 0, activetotal = 0, exitpatients = 0;
         },
         error: function (response) {
             console.log("ERROR for OU = " + selectedou + " and Period = " + month);
-            var row = '<tr onclick="displayValues(this,13);"><td>Active and LTFU report</td><td>' + ounames[selectedou] + '</td><td>Monthly</td><td>' + month + '</td><td>' + value + '</td><td>Error</td></tr>'
+            var row = '<tr onclick="displayValues(this,13);"><td>Active and LTFU report</td><td>' + ounames[selectedou] + '</td><td>Monthly</td><td>' + month + '</td><td>' + value + '</td><td style="background-color:#f55b5b">Error</td></tr>'
             $('.reporttable').append(row);
             hasFollowup3mon = 0, activeatendevent = 0, LTFU12mon = 0, LTFU6mon = 0, activeatanyp = 0, activetotal = 0, exitpatients = 0;
         }

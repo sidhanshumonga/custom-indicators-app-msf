@@ -229,7 +229,7 @@ var pushfunctionR8 = function (value, quarter, selectedou) {
         data: JSON.stringify(dataValueSet),
         success: function (response) {
             console.log("Successfully pushed for OU = " + selectedou + " and Period = " + quarter + " value " + value);
-            var row = '<tr onclick="displayValues(this,9);"><td>HTN Medications</td><td>' + ounames[selectedou] + '</td><td>Quarterly</td><td>' + quarter + '</td><td>' + value + '</td><td>Success</td></tr>'
+            var row = '<tr onclick="displayValues(this,9);"><td>HTN Medications</td><td>' + ounames[selectedou] + '</td><td>Quarterly</td><td>' + quarter + '</td><td>' + value + '</td><td style="background-color:#d0e0b8">Success</td></tr>'
             $('.reporttable').append(row);
             totalPatientsHTN = 0, totalHTNPatients12withBP = 0;
             totalPatients1Medicine = 0, totalPatients2Medicines = 0, totalPatients3MedicinesMore = 0, totalMedications = 0;
@@ -237,7 +237,7 @@ var pushfunctionR8 = function (value, quarter, selectedou) {
         },
         warning: function (response) {
             console.log("Warning! for OU = " + selectedou + " and Period = " + quarter);
-            var row = '<tr onclick="displayValues(this,9);"><td>HTN Medications</td><td>' + ounames[selectedou] + '</td><td>Quarterly</td><td>' + quarter + '</td><td>' + value + '</td><td>Warning</td></tr>'
+            var row = '<tr onclick="displayValues(this,9);"><td>HTN Medications</td><td>' + ounames[selectedou] + '</td><td>Quarterly</td><td>' + quarter + '</td><td>' + value + '</td><td style="background-color:#fff995">Warning</td></tr>'
             $('.reporttable').append(row);
             totalPatientsHTN = 0, totalHTNPatients12withBP = 0;
             totalPatients1Medicine = 0, totalPatients2Medicines = 0, totalPatients3MedicinesMore = 0, totalMedications = 0;
@@ -245,7 +245,7 @@ var pushfunctionR8 = function (value, quarter, selectedou) {
         },
         error: function (response) {
             console.log("ERROR for OU = " + selectedou + " and Period = " + quarter);
-            var row = '<tr onclick="displayValues(this,9);"><td>HTN Medications</td><td>' + ounames[selectedou] + '</td><td>Quarterly</td><td>' + quarter + '</td><td>' + value + '</td><td>Error</td></tr>'
+            var row = '<tr onclick="displayValues(this,9);"><td>HTN Medications</td><td>' + ounames[selectedou] + '</td><td>Quarterly</td><td>' + quarter + '</td><td>' + value + '</td><td style="background-color:#f55b5b">Error</td></tr>'
             $('.reporttable').append(row);
             totalPatientsHTN = 0, totalHTNPatients12withBP = 0;
             totalPatients1Medicine = 0, totalPatients2Medicines = 0, totalPatients3MedicinesMore = 0, totalMedications = 0;

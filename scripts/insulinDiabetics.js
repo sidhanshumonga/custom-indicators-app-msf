@@ -165,19 +165,19 @@ var pushfunctionR11 = function (value, month, selectedou) {
         data: JSON.stringify(dataValueSet),
         success: function (response) {
             console.log("Successfully pushed for OU = " + selectedou + " and Period = " + month + " value " + value);
-            var row = '<tr onclick="displayValues(this,11);"><td>Insulin Diabetics</td><td>' + ounames[selectedou] + '</td><td>Monthly</td><td>' + month + '</td><td>' + value + '</td><td>Success</td></tr>'
+            var row = '<tr onclick="displayValues(this,11);"><td>Insulin Diabetics</td><td>' + ounames[selectedou] + '</td><td>Monthly</td><td>' + month + '</td><td>' + value + '</td><td style="background-color:#d0e0b8">Success</td></tr>'
             $('.reporttable').append(row);
             t1countn = 0, t2countn = 0, it1countn = 0, it1countp = 0, it2countn = 0, it2countp = 0;
         },
         warning: function (response) {
             console.log("Warning! for OU = " + selectedou + " and Period = " + month);
-            var row = '<tr onclick="displayValues(this,11);"><td>Insulin Diabetics</td><td>' + ounames[selectedou] + '</td><td>Monthly</td><td>' + month + '</td><td>' + value + '</td><td>Warning</td></tr>'
+            var row = '<tr onclick="displayValues(this,11);"><td>Insulin Diabetics</td><td>' + ounames[selectedou] + '</td><td>Monthly</td><td>' + month + '</td><td>' + value + '</td><td style="background-color:#fff995">Warning</td></tr>'
             $('.reporttable').append(row);
             t1countn = 0, t2countn = 0, it1countn = 0, it1countp = 0, it2countn = 0, it2countp = 0;
         },
         error: function (response) {
             console.log("ERROR for OU = " + selectedou + " and Period = " + month);
-            var row = '<tr onclick="displayValues(this,11);"><td>Insulin Diabetics</td><td>' + ounames[selectedou] + '</td><td>Monthly</td><td>' + month + '</td><td>' + value + '</td><td>Error</td></tr>'
+            var row = '<tr onclick="displayValues(this,11);"><td>Insulin Diabetics</td><td>' + ounames[selectedou] + '</td><td>Monthly</td><td>' + month + '</td><td>' + value + '</td><td style="background-color:#f55b5b">Error</td></tr>'
             $('.reporttable').append(row);
             t1countn = 0, t2countn = 0, it1countn = 0, it1countp = 0, it2countn = 0, it2countp = 0;
         }

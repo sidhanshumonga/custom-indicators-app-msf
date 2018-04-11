@@ -41,7 +41,7 @@ var creatinineclear = function (events, aa, len, p, ou) {
     var enddate = p;
     var startdate = getQuarterStartDate(p);
     var active = false;
-    var indexx = 0;
+    var indexx = events.length - 2;
     var EventAttr = "";
     if (events !== undefined && events.length != 0) {
 
@@ -51,7 +51,7 @@ var creatinineclear = function (events, aa, len, p, ou) {
             var expireDate = new Date(first);
             if (expireDate >= new Date(startdate)) {
                 active = true;
-                indexx = events.length - 2;
+                indexx = events.length - 1;
             }
         }
         else {
@@ -78,14 +78,14 @@ var creatinineclear = function (events, aa, len, p, ou) {
                     applicable = true;
                 }
             }
-            for (var b = events.length - 1; b >= 0; b--) {
+            for (var b = indexx; b >= 0; b--) {
                 var currentEventAttr = events[b].dataValues;
                 for (var j = 0; j < currentEventAttr.length; j++) {
                     if ((currentEventAttr[j].dataElement == "bxZbTKBLYGL" || currentEventAttr[j].dataElement == "KEVxrQoxfJ9") && curValCrt < 0) { //&& (currentEventAttr[j].value > 0 )) { 
                         curValCrt = parseFloat(currentEventAttr[j].value).toFixed(2);
 
                     }
-                    if ((currentEventAttr[j].dataElement == "Pp1cKHJWH2W") && curValW < 0) {
+                    if ((currentEventAttr[j].dataElement == "Pp1cKHJWH2W" || currentEventAttr[j].dataElement == "rKi92UQ4XmX") && curValW < 0) {
                         curValW = parseInt(currentEventAttr[j].value).toFixed(2);
                     }
 
@@ -176,21 +176,21 @@ var pushfunctionR2 = function (value, quarter, selectedou) {
         data: JSON.stringify(dataValueSet),
         success: function (response) {
             console.log("Successfully pushed for OU = " + selectedou + " and Period = " + quarter + " value " + value);
-            var row = '<tr onclick="displayValues(this,3);"><td>Creatinine Clearance</td><td>' + ounames[selectedou] + '</td><td>Quarterly</td><td>' + quarter + '</td><td>' + value + '</td><td>Success</td></tr>'
+            var row = '<tr onclick="displayValues(this,3);"><td>Creatinine Clearance</td><td>' + ounames[selectedou] + '</td><td>Quarterly</td><td>' + quarter + '</td><td>' + value + '</td><td style="background-color:#d0e0b8">Success</td></tr>'
             $('.reporttable').append(row);
             crtMoreThan90 = 0, crtMoreThan60LessThan90 = 0, crtMoreThan30LessThan60 = 0, crtMoreThan15LessThan30 = 0, crtLessThan15 = 0;
             totalPatientsWithCRT = 0;
         },
         warning: function (response) {
             console.log("Warning! for OU = " + selectedou + " and Period = " + quarter);
-            var row = '<tr onclick="displayValues(this,3);"><td>Creatinine Clearance</td><td>' + ounames[selectedou] + '</td><td>Quarterly</td><td>' + quarter + '</td><td>' + value + '</td><td>Warning</td></tr>'
+            var row = '<tr onclick="displayValues(this,3);"><td>Creatinine Clearance</td><td>' + ounames[selectedou] + '</td><td>Quarterly</td><td>' + quarter + '</td><td>' + value + '</td><td style="background-color:#fff995">Warning</td></tr>'
             $('.reporttable').append(row);
             crtMoreThan90 = 0, crtMoreThan60LessThan90 = 0, crtMoreThan30LessThan60 = 0, crtMoreThan15LessThan30 = 0, crtLessThan15 = 0;
             totalPatientsWithCRT = 0;
         },
         error: function (response) {
             console.log("ERROR for OU = " + selectedou + " and Period = " + quarter);
-            var row = '<tr onclick="displayValues(this,3);"><td>Creatinine Clearance</td><td>' + ounames[selectedou] + '</td><td>Quarterly</td><td>' + quarter + '</td><td>' + value + '</td><td>Error</td></tr>'
+            var row = '<tr onclick="displayValues(this,3);"><td>Creatinine Clearance</td><td>' + ounames[selectedou] + '</td><td>Quarterly</td><td>' + quarter + '</td><td>' + value + '</td><td style="background-color:#f55b5b">Error</td></tr>'
             $('.reporttable').append(row);
             crtMoreThan90 = 0, crtMoreThan60LessThan90 = 0, crtMoreThan30LessThan60 = 0, crtMoreThan15LessThan30 = 0, crtLessThan15 = 0;
             totalPatientsWithCRT = 0;
