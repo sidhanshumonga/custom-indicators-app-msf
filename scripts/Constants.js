@@ -137,7 +137,7 @@ var report11 = ["Number of insulin diabetic type 1 patients seen in the reportin
 var report12 = ["Number of new diagnosised patients during the reporting period"];
 
 var report13 = ["Patients with at least 1 follow-up consultation in previous 3 months-Calculated value_NCD",
-    "Active patients (monthly, end of reporting period)-Calculated value_NCD",
+    "Active patients + exit patients during reporting period-Calculated value_NCD",    
     "LTFU (> 6 months)-Calculated value_NCD",
     "LTFU (> 12 months)-Calculated value_NCD",
-    "Active patients + exit patients during reporting period-Calculated value_NCD"];
+    "Active patients (monthly, end of reporting period)-Calculated value_NCD"];
