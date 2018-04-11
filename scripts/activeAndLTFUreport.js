@@ -2,106 +2,128 @@
 // 2018-04-10
 
 //variables using
-var   t1countn = 0, t2countn = 0, it1countn = 0, it1countp = 0, it2countn = 0, it2countp = 0;
+var hasFollowup3mon = 0, activeatendevent = 0, LTFU12mon = 0, LTFU6mon = 0, activeatanyp = 0, activetotal = 0, exitpatients = 0;
 
 
-var insulindiabetics = function (events, aa, len, p, ou) {
+var activeandltfu = function (events, aa, len, p, ou) {
     var quarterToPush = getMonthToPush(p);
     var enddate = p;
     var startdate = getMonthStartDate(p);
-    var type1p = false, type1n = false;
-    var type2p = false, type2n = false;
-    var type1nF = false, type2nF = false;
-    var itype1p = false, itype1n = false;
-    var itype2p = false, itype2n = false;
-    var visitMade = false;
-    var temp = false;
+    var count = 0, count2 = 0, count3 = 1, count4 = 1;
+    var flag6mon = 0, countExit = 0;
+    var flag12mon = 0;
+    var activeatanypoint = false;
+    var exitevents = [{ events: [] }];
+    var followupvisits = [{ events: [] }];
+    var firstVisit = [{ events: [] }];
+    var predate = new Date(startdate);
+    predate.setMonth(predate.getMonth() - 3);
 
+    if (events !== undefined && events.length != 0) {
 
-   if (events !== undefined && events.length != 0)  {
-        //search for diagnosis
-        for (var b = 0; b < events.length; b++) {
-                var date = events[b].eventDate;
+        //filter events in single call 
+        for (var a = events.length - 1; a >= 0; a--) {
+            switch (events[a].programStage) {
+                case "Kr60c8j7vMe"://exit
+                    exitevents[0].events.push(events[a]);
+                    break;
+
+                case "HvBZokNtaEZ":// followup
+                    followupvisits[0].events.push(events[a]);
+                    break;
+
+                case "kwXu1zEDMEe"://first visit
+                    firstVisit[0].events.push(events[a]);
+                    break;
+            }
+        }
+        {
+            // data1 api call
+            if (exitevents[0].events.length == 0) {
+                count = 1;
+                activeatanypoint = true;
+            }
+            else {
+                var date = exitevents[0].events[0].eventDate;
                 var first = date.split('T')[0];
                 var expireDate = new Date(first);
-                
-                if(new Date(enddate) >= expireDate && expireDate >= new Date(startdate)){
-                    visitMade = true;
+                if (new Date(startdate) < expireDate) {
+                    activeatanypoint = true;
                 }
-
-                var currentEventAttr = events[b].dataValues;
-                for (var j = 0; j < currentEventAttr.length ; j++) {
-                    if ((currentEventAttr[j].dataElement == "lzBg6QalyhT" || currentEventAttr[j].dataElement == "rwDJebu16Fu") && (currentEventAttr[j].value == "Newly_diagnosed" || currentEventAttr[j].value == "Previously_diagnosed")) {
-                        if(new Date(enddate) >= expireDate && expireDate >= new Date(startdate)) {
-                            type1n = true;
-                            type1p = true;
-                        }else if(expireDate<new Date(startdate)){
-                            type1nF = true;		
-                        }
-                        if(expireDate<new Date(enddate)){
-                        //	type1p = true;
-                        } 
-                    }
-                        //for (var p = 0; p < currentEventAttr.length; p++) {
-                            if (currentEventAttr[j].value.trim() == "Insulin, 100 IU/ml, Biphasic 30, human, 10 ml" || currentEventAttr[j].value.trim() == "Insuline NPH" || currentEventAttr[j].value == "Insulin rapid" || currentEventAttr[j].value == "Insulin regular") {
-                                if(new Date(enddate) >= expireDate && expireDate >= new Date(startdate)){
-                                    itype1n = true;
-                                    //itype1p = true;
-                                }
-                                if(expireDate<=new Date(enddate)) {
-                                    itype1p = true;
-                                }
-                            }
-                        //}
-                    //}
-                    if ((currentEventAttr[j].dataElement == "uoVoakOJULl" || currentEventAttr[j].dataElement == "nwFajZjl3Fa") && (currentEventAttr[j].value == "Newly_diagnosed" || currentEventAttr[j].value == "Previously_diagnosed")) {
-                        if(new Date(enddate) >= expireDate && expireDate >= new Date(startdate)) 
-                        {type2n = true;
-                            type2p = true;}
-                        else if(expireDate<new Date(startdate))type2nF = true;
-                        //if(expireDate<new Date(enddate)) type2p = true;
-                    }
-                    //	for (1var p = 0; p < currentEventAttr.length; p++) {
-                            if (currentEventAttr[j].value.trim() == "Insulin, 100 IU/ml, Biphasic 30, human, 10 ml" || currentEventAttr[j].value == "Insuline NPH" || currentEventAttr[j].value == "Insulin rapid" || currentEventAttr[j].value == "Insulin regular") {
-                                if(new Date(enddate) >= expireDate && expireDate >= new Date(startdate)) {
-                                    itype2n = true;
-                                   
-                                }//else
-                                if(expireDate<=new Date(enddate)) {
-                                    itype2p = true;
-                                }
-                            }
-                    //	}
-                    //}
+                if (new Date(enddate) < expireDate) {
+                    count = 1;
+                }
+                if (new Date(enddate) >= expireDate && expireDate >= new Date(startdate)) {
+                    countExit = 1;
                 }
             }
 
+        }
+        {
+            if (followupvisits[0].events.length == 0) {
+                count2 = 0;
+            }
+             else {
+
+                if (count == 1) {
+
+                    var date = followupvisits[0].events[0].eventDate;
+                    var first = date.split('T')[0];
+                    var latestEventDate = new Date(first);
+
+                    var dateSixMonthsAgo = new Date(startdate);
+                    var dateTwelveMonthsAgo = new Date(startdate);
+                    dateSixMonthsAgo.setMonth(dateSixMonthsAgo.getMonth() - 6);
+                    dateTwelveMonthsAgo.setFullYear(dateTwelveMonthsAgo.getFullYear() - 1);
+                    dateTwelveMonthsAgo.setDate(dateTwelveMonthsAgo.getDate() - 1);
+                    if (new Date(startdate) >= expireDate && expireDate >= predate) {
+                        count2 = 1;
+                    }
+
+                    if (new Date(enddate) >= latestEventDate && latestEventDate >= dateSixMonthsAgo) {
+                        count3 = 1;
+                    }
+                    else {
+                        count3 = 0;
+                    }
+                    if (new Date(enddate) >= latestEventDate && latestEventDate >= dateTwelveMonthsAgo) {
+                        count4 = 1;
+                    }
+                    else {
+                        count4 = 0;
+                    }
 
 
-        if (visitMade) {
-            if (type1p) {
-               // t1countp++;
-                if (itype1p) it1countp++;
-            }
-            if (!type1nF && type1n) {
-                t1countn++;
-                if (itype1n) it1countn++;
-            }
-
-            if (type2p) {
-              //  t2countp++;
-                if (itype2p) it2countp++;
-            }
-            if (!type2nF && type2n) {
-                t2countn++;
-                if (itype2n) it2countn++;
+                }
             }
         }
 
+        {
+            if (count == 1) {
+                activeatendevent++;
+            }
+            if (activeatanypoint) {
+                activeatanyp++;
+                if (count2 == 1) {
+                    hasFollowup3mon++;
+                }
+                if (count3 == 0) {
+                    LTFU6mon++;
+                }
+                if (count4 == 0) {
+                    LTFU12mon++;
+                }
+            }
+
+            if (countExit == 1) {
+                exitpatients++;
+            }
+            activetotal = activeatendevent + exitpatients;
+        }
     }
 
     if (aa >= len - 1) {
-        var dbarray = [it1countp, it2countp, it1countn, it2countn, t1countn, t2countn];
+        var dbarray = [hasFollowup3mon, activetotal, LTFU6mon, LTFU12mon, activeatanyp];
         pushfunctionR11(dbarray, getMonthToPush(p), ou);
     }
 
@@ -113,47 +135,40 @@ var pushfunctionR11 = function (value, month, selectedou) {
         "period": month,
         "orgUnit": selectedou,
         "dataValues": [{
-            "dataElement": "i8iK8OKHcRc",
+            "dataElement": "GQB3ItZPMqo",
             "categoryOptionCombo": "HllvX50cXC0",
             "period": month,
             "orgUnit": selectedou,
             "value": value[0]
         },
         {
-            "dataElement": "X7CJasUeDQC",
+            "dataElement": "sZOOUET6rbf",
             "categoryOptionCombo": "HllvX50cXC0",
             "period": month,
             "orgUnit": selectedou,
             "value": value[1]
         },
         {
-            "dataElement": "SWCMrTMdgAA",
+            "dataElement": "kxAtq4g9TOQ",
             "categoryOptionCombo": "HllvX50cXC0",
             "period": month,
             "orgUnit": selectedou,
             "value": value[2]
         },
         {
-            "dataElement": "DNquPXisIP6",
+            "dataElement": "Ouij0kxPyQk",
             "categoryOptionCombo": "HllvX50cXC0",
             "period": month,
             "orgUnit": selectedou,
             "value": value[3]
         },
         {
-            "dataElement": "pFgZOxIxmI1",
+            "dataElement": "F5xG6cIiRIu",
             "categoryOptionCombo": "HllvX50cXC0",
             "period": month,
             "orgUnit": selectedou,
             "value": value[4]
-        },
-        {
-            "dataElement": "YrPPC51vLf2",
-            "categoryOptionCombo": "HllvX50cXC0",
-            "period": month,
-            "orgUnit": selectedou,
-            "value": value[5]
-        },
+        }
         ]
     };
     $.ajax({
@@ -165,21 +180,21 @@ var pushfunctionR11 = function (value, month, selectedou) {
         data: JSON.stringify(dataValueSet),
         success: function (response) {
             console.log("Successfully pushed for OU = " + selectedou + " and Period = " + month + " value " + value);
-            var row = '<tr onclick="displayValues(this,11);"><td>Insulin Diabetics</td><td>' + ounames[selectedou] + '</td><td>Monthly</td><td>' + month + '</td><td>' + value + '</td><td>Success</td></tr>'
+            var row = '<tr onclick="displayValues(this,13);"><td>Active and LTFU report</td><td>' + ounames[selectedou] + '</td><td>Monthly</td><td>' + month + '</td><td>' + value + '</td><td>Success</td></tr>'
             $('.reporttable').append(row);
-            t1countn = 0, t2countn = 0, it1countn = 0, it1countp = 0, it2countn = 0, it2countp = 0;
+            hasFollowup3mon = 0, activeatendevent = 0, LTFU12mon = 0, LTFU6mon = 0, activeatanyp = 0, activetotal = 0, exitpatients = 0;
         },
         warning: function (response) {
             console.log("Warning! for OU = " + selectedou + " and Period = " + month);
-            var row = '<tr onclick="displayValues(this,11);"><td>Insulin Diabetics</td><td>' + ounames[selectedou] + '</td><td>Monthly</td><td>' + month + '</td><td>' + value + '</td><td>Warning</td></tr>'
+            var row = '<tr onclick="displayValues(this,13);"><td>Active and LTFU report</td><td>' + ounames[selectedou] + '</td><td>Monthly</td><td>' + month + '</td><td>' + value + '</td><td>Warning</td></tr>'
             $('.reporttable').append(row);
-            t1countn = 0, t2countn = 0, it1countn = 0, it1countp = 0, it2countn = 0, it2countp = 0;
+            hasFollowup3mon = 0, activeatendevent = 0, LTFU12mon = 0, LTFU6mon = 0, activeatanyp = 0, activetotal = 0, exitpatients = 0;
         },
         error: function (response) {
             console.log("ERROR for OU = " + selectedou + " and Period = " + month);
-            var row = '<tr onclick="displayValues(this,11);"><td>Insulin Diabetics</td><td>' + ounames[selectedou] + '</td><td>Monthly</td><td>' + month + '</td><td>' + value + '</td><td>Error</td></tr>'
+            var row = '<tr onclick="displayValues(this,13);"><td>Active and LTFU report</td><td>' + ounames[selectedou] + '</td><td>Monthly</td><td>' + month + '</td><td>' + value + '</td><td>Error</td></tr>'
             $('.reporttable').append(row);
-            t1countn = 0, t2countn = 0, it1countn = 0, it1countp = 0, it2countn = 0, it2countp = 0;
+            hasFollowup3mon = 0, activeatendevent = 0, LTFU12mon = 0, LTFU6mon = 0, activeatanyp = 0, activetotal = 0, exitpatients = 0;
         }
     });
 };

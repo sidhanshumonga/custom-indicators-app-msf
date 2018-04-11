@@ -46,6 +46,12 @@ var displayValues = function (param,reportIndex) {
         else if(reportIndex == 11){
             data = data + "<tr><td colspan='2'>" + report11[i] + "</td><td colspan='2'>" + valuearray[i] + "</td></tr>"
         }
+        else if(reportIndex == 12){
+            data = data + "<tr><td colspan='2'>" + report12[i] + "</td><td colspan='2'>" + valuearray[i] + "</td></tr>"
+        }
+        else if(reportIndex == 13){
+            data = data + "<tr><td colspan='2'>" + report13[i] + "</td><td colspan='2'>" + valuearray[i] + "</td></tr>"
+        }
         else{}
         }
     $(".popupTable tbody").remove();

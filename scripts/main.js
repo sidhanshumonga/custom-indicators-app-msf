@@ -91,10 +91,10 @@ var callingEnrollments = function (array, j) {
     if (j >= array.length) {
         // console.log(enrollmentsMapOuDate);
         enrollmentLoop(enrollmentsMapOuDate);
-        document.getElementById("loader").style.display = "none";
+      //  document.getElementById("loader").style.display = "none";
     }
     else {
-        loadingText = "loading enrollments from all Orgunits...";
+        loadingText = "calculating values for quarterly indicators..";
         displayText(loadingText);
         var ou = array[j].split("/")[0];
         var date = array[j].split("/")[1];
@@ -140,7 +140,7 @@ var callingEnrollmentsForLastYearDates = function (array2, array, j) {
         //document.getElementById("loader").style.display = "none";
     }
     else {
-        loadingText = "loading enrollments from all Orgunits...";
+        loadingText = "calculating values for quarterly indicators..";
         displayText(loadingText);
         var ou = array[j].split("/")[0];
         var date = array[j].split("/")[1];
@@ -179,10 +179,10 @@ var callingEnrollmentsMonthly = function(array, j){
     if (j >= array.length) {
         // console.log(enrollmentsMapOuDate);
         enrollmentLoopMonthly(monthlyenrollmentsMapOuDate);
-        //document.getElementById("loader").style.display = "none";
+        document.getElementById("loader").style.display = "none";
     }
     else {
-        loadingText = "loading enrollments from all Orgunits...";
+        loadingText = "calculating values for monthly indicators..";
         displayText(loadingText);
         var ou = array[j].split("/")[0];
         var date = array[j].split("/")[1];
@@ -205,6 +205,8 @@ var enrollmentLoopMonthly = function(array){
                 var tei = enrollments[h].trackedEntityInstance;
                 var events = teiEventsMap[tei];
                 insulindiabetics(events, h, enrollments.length, p, o);
+                newdiagnosis(events, h, enrollments.length, p, o);
+                activeandltfu(events, h, enrollments.length, p, o);
             }
         }
     }
