@@ -12,7 +12,7 @@ var totalPatientsWithCRT = 0;
 
 var getGender = function (tei) {
     var value = '';
-    _getGender(tei).then(function(res){
+    _getGender(tei).then(function (res) {
         for (var i = 0; i < res.attributes.length && value == ''; i++) {
             if (res.attributes[i].displayName == 'Sex') {
                 value = res.attributes[i].value;
@@ -25,10 +25,10 @@ var getGender = function (tei) {
 
 var getCrtValue = function (gender, curValA, curValCrt, curValW) {
     if (gender == 'Male') {
-        var crtvalue = (140 - curValA) * (curValW) / (curValCrt * 72);
+        var crtvalue = ((140 - curValA) * curValW) / (curValCrt * 72);
     }
     else {
-        var crtvalue = (140 - curValA) * (curValW * 0.85) / (curValCrt * 72);
+        var crtvalue = 0.85 * ((140 - curValA) * curValW) / (curValCrt * 72);
     }
     return crtvalue;
 };
@@ -37,11 +37,11 @@ var getCrtValue = function (gender, curValA, curValCrt, curValW) {
 
 var creatinineclear = function (events, aa, len, p, ou) {
     var quarterToPush = getQuarterToPush(p);
-   
+
     var enddate = p;
     var startdate = getQuarterStartDate(p);
     var active = false;
-    var indexx = events.length - 2;
+    var indexx = 0;
     var EventAttr = "";
     if (events !== undefined && events.length != 0) {
 
@@ -49,9 +49,9 @@ var creatinineclear = function (events, aa, len, p, ou) {
             var date = events[events.length - 1].eventDate;
             var first = date.split('T')[0];
             var expireDate = new Date(first);
-            if (expireDate >= new Date(startdate)) {
+            if (expireDate > new Date(startdate)) {
                 active = true;
-                indexx = events.length - 1;
+                indexx = events.length - 2;
             }
         }
         else {
@@ -65,56 +65,99 @@ var creatinineclear = function (events, aa, len, p, ou) {
     var curValW = -1;
     var curValA = -1;
     var curValCrt = -1;
+    var wflag = false;
+    var aflag = false;
+    var crtDate = "";
+    var wDate = "";
     if (active) {
-        var date = events[indexx].eventDate;
-        var first = date.split('T')[0];
-        var expireDate = new Date(first);
-        //   var startdate = getStartDate(enddate);
-        var tei = events[indexx].trackedEntityInstance;
-        if (new Date(enddate) >= expireDate && expireDate >= new Date(startdate)) {
-            var currentEventAttr1 = events[indexx].dataValues;
-            for (var j = 0; j < currentEventAttr1.length; j++) {
-                if ((currentEventAttr1[j].dataElement == "lzBg6QalyhT" || currentEventAttr1[j].dataElement == "rwDJebu16Fu" || currentEventAttr1[j].dataElement == "uoVoakOJULl" || currentEventAttr1[j].dataElement == "nwFajZjl3Fa" || currentEventAttr1[j].dataElement == "D4Z6XYfNQR9" || currentEventAttr1[j].dataElement == "Ft37n3yO81y") && (currentEventAttr1[j].value == "Newly_diagnosed" || currentEventAttr1[j].value == "Previously_diagnosed")) { //&& (currentEventAttr[j].value > 0 )) { 
-                    applicable = true;
-                }
-            }
-            for (var b = indexx; b >= 0; b--) {
-                var currentEventAttr = events[b].dataValues;
-                for (var j = 0; j < currentEventAttr.length; j++) {
-                    if ((currentEventAttr[j].dataElement == "bxZbTKBLYGL" || currentEventAttr[j].dataElement == "KEVxrQoxfJ9") && curValCrt < 0) { //&& (currentEventAttr[j].value > 0 )) { 
-                        curValCrt = parseFloat(currentEventAttr[j].value).toFixed(2);
-
+        for (var b = indexx; b >= 0; b--) {
+            var date = events[b].eventDate;
+            var first = date.split('T')[0];
+            var expireDate = new Date(first);
+            //   var startdate = getStartDate(enddate);
+            var tei = events[b].trackedEntityInstance;
+            if (new Date(enddate) >= expireDate && expireDate >= new Date(startdate)) {
+                var currentEventAttr1 = events[b].dataValues;
+                for (var j = 0; j < currentEventAttr1.length; j++) {
+                    if ((currentEventAttr1[j].dataElement == "lzBg6QalyhT" || currentEventAttr1[j].dataElement == "rwDJebu16Fu" || currentEventAttr1[j].dataElement == "uoVoakOJULl" || currentEventAttr1[j].dataElement == "nwFajZjl3Fa" || currentEventAttr1[j].dataElement == "D4Z6XYfNQR9" || currentEventAttr1[j].dataElement == "Ft37n3yO81y") && (currentEventAttr1[j].value == "Newly_diagnosed" || currentEventAttr1[j].value == "Previously_diagnosed") && !applicable) { //&& (currentEventAttr[j].value > 0 )) { 
+                        applicable = true;
                     }
-                    if ((currentEventAttr[j].dataElement == "Pp1cKHJWH2W" || currentEventAttr[j].dataElement == "rKi92UQ4XmX") && curValW < 0) {
-                        curValW = parseInt(currentEventAttr[j].value).toFixed(2);
-                    }
-
-                    if ((currentEventAttr[j].dataElement == "yKw8AtDDVng") && curValA < 0) {
-                        curValA = parseInt(currentEventAttr[j].value);
-                    }
-
                 }
             }
 
+
+
+            var currentEventAttr = events[b].dataValues;
+            for (var j = 0; j < currentEventAttr.length; j++) {
+                if ((currentEventAttr[j].dataElement == "bxZbTKBLYGL" || currentEventAttr[j].dataElement == "KEVxrQoxfJ9") && curValCrt < 0) { //&& (currentEventAttr[j].value > 0 )) { 
+                    curValCrt = parseFloat(currentEventAttr[j].value);
+                    var date = events[b].eventDate;
+                    var first = date.split('T')[0];
+                    crtDate = new Date(first);
+                }
+                if ((currentEventAttr[j].dataElement == "Pp1cKHJWH2W" || currentEventAttr[j].dataElement == "rKi92UQ4XmX") && curValW < 0) {
+                    wflag = true;
+                }
+
+                if ((currentEventAttr[j].dataElement == "yKw8AtDDVng") && curValA < 0 && curValCrt > 0) {
+                    aflag = true;
+                }
+
+            }
         }
-    }
-            if (curValCrt > 0 && curValW > 0 && applicable) {
-                totalPatientsWithCRT++;
-                var gender = getGender(tei);
-                var crtvalue = getCrtValue(gender, curValA, curValCrt, curValW);
+        if (wflag) {
+            for (var bb = indexx; bb >= 0; bb--) {
+                var date = events[bb].eventDate;
+                var first = date.split('T')[0];
+                wDate = new Date(first);
+                if (wDate <= crtDate) {
+                    var currentEventAttr2 = events[bb].dataValues;
+                    for (var jk = 0; jk < currentEventAttr2.length; jk++) {
+                        if ((currentEventAttr2[jk].dataElement == "Pp1cKHJWH2W" || currentEventAttr2[jk].dataElement == "rKi92UQ4XmX") && curValW < 0) {
+                            curValW = parseInt(currentEventAttr2[jk].value);
+                        }
+                    }
 
-                if (crtvalue >= 90) { crtMoreThan90++; }
-                if (crtvalue < 90 && crtvalue >= 60) { crtMoreThan60LessThan90++; }
-                if (crtvalue < 60 && crtvalue >= 30) { crtMoreThan30LessThan60++; }
-                if (crtvalue < 30 && crtvalue >= 15) { crtMoreThan15LessThan30++; }
-                if (crtvalue < 15) { crtLessThan15++; }
+                }
             }
-      
-    
-            if (aa >= len - 1) {
-                var crtarray = [crtMoreThan90, crtMoreThan60LessThan90, crtMoreThan30LessThan60, crtMoreThan15LessThan30, crtLessThan15, totalPatientsWithCRT];
-                pushfunctionR2(crtarray, quarterToPush, ou);
+        }
+        if (aflag) {
+            for (var bb = indexx; bb >= 0; bb--) {
+                var date = events[bb].eventDate;
+                var first = date.split('T')[0];
+                var aDate = new Date(first);
+                if (aDate <= crtDate) {
+                    var currentEventAttr2 = events[bb].dataValues;
+                    for (var jk = 0; jk < currentEventAttr2.length; jk++) {
+                        if ((currentEventAttr[jk].dataElement == "yKw8AtDDVng") && curValA < 0 && curValCrt > 0) {
+                            curValA = parseInt(currentEventAttr[jk].value);
+                        }
+                    }
+
+                }
             }
+        }
+
+    }
+    if (curValCrt > 0 && wflag && curValW > 0 && curValA > 0 && applicable) {
+        totalPatientsWithCRT++;
+        var gender = getGender(tei);
+        var crtvalue = getCrtValue(gender, curValA, curValCrt, curValW);
+
+        if (crtvalue >= 90) { crtMoreThan90++; }
+        if (crtvalue < 90 && crtvalue >= 60) { crtMoreThan60LessThan90++; }
+        if (crtvalue < 60 && crtvalue >= 30) { crtMoreThan30LessThan60++; }
+        if (crtvalue < 30 && crtvalue >= 15) { crtMoreThan15LessThan30++; }
+        if (crtvalue < 15) { crtLessThan15++; }
+    }
+
+
+
+
+    if (aa >= len - 1) {
+        var crtarray = [crtMoreThan90, crtMoreThan60LessThan90, crtMoreThan30LessThan60, crtMoreThan15LessThan30, crtLessThan15, totalPatientsWithCRT];
+        pushfunctionR2(crtarray, quarterToPush, ou);
+    }
 
 };
 
