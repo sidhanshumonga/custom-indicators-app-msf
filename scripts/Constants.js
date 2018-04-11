@@ -12,6 +12,30 @@ var exitPS = "Kr60c8j7vMe";
 var followupPS = "HvBZokNtaEZ";
 var firstVisitPS = "kwXu1zEDMEe";
 
+
+//new diagnosis report variables used
+var d1 = "MIOqsaeW1s5";
+var d2 = "rLfKA2uDpI1";
+var d3 = "XBpPEm4twyG";
+var d4 = "lzBg6QalyhT";
+var d5 = "uoVoakOJULl";
+var d6 = "pHxWTwQMMmR";
+var d7 = "PoCEfKNlJJk";
+var d8 = "Ft37n3yO81y";
+var d9 = "JYrVSslAvWF";
+var d10 = "z7aLqkhkdIn";
+
+var dd1 = "iqnWbI6EFOb";
+var dd2 = "GSH68kIsvKX";
+var dd3 = "tLUOAB3NwP8";
+var dd4 = "rwDJebu16Fu";
+var dd5 = "nwFajZjl3Fa";
+var dd6 = "xwLbbjni5iY";
+var dd7 = "Qw7vZ5x7H0e";
+var dd8 = "D4Z6XYfNQR9";
+var dd9 = "CqOIRxdVmay";
+var dd10 = "es15Sv05Nmb";
+
 //medication dataelements
 var medDataElements =
     ["nQ32sHUnPKv", "e4RAOrfr6Oz", "JiMkzWDtYwL", "SSHzwRe5rWG", "QGddWBd4WGw", "bHdzWTNZvM3", "gTL8HOgeCq2", "TzdFTRlnjeC", "oQIMNkobUke", "CEP72QOx3GW",
@@ -102,3 +126,10 @@ var report9 = ["Number of perscribed antihypertensive medications during the rep
 
 var report10 = ["Active patients at end of reporting quarter who enrolled in same quarter last year-Calculated value_NCD",
     "Patients enrolled in same quarter last year-Calculated value_NCD"];
+
+var report11 = ["Number of insulin diabetic type 1 patients seen in the reporting period",
+    "Number of insulin diabetic type 2 patients seen in the reporting period",
+    "Number of new insulin diabetic type 1 patients seen in the reporting period",
+    "Number of new insulin diabetic type 2 patients seen in the reporting period",
+    "Total number of new diabetic type 1 patients seen in the reporting period",
+    "Total number of new diabetic type 2 patients seen in the reporting period"];

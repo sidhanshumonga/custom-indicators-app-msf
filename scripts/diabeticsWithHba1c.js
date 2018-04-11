@@ -190,17 +190,17 @@ var pushfunctionR6 = function (value, quarter, selectedou) {
         data: JSON.stringify(dataValueSet),
         success: function (response) {
             console.log("Successfully pushed for OU = " + selectedou + " and Period = " + quarter + " value " + value);
-            var row = '<tr onclick="displayValues(this,6);"><td>Diabetics with HBA1C in last 6 months</td><td>' + ounames[selectedou] + '</td><td>' + quarter + '</td><td>' + value + '</td><td>Success</td></tr>'
+            var row = '<tr onclick="displayValues(this,6);"><td>Diabetics with HBA1C in last 6 months</td><td>' + ounames[selectedou] + '</td><td>Quarterly</td><td>' + quarter + '</td><td>' + value + '</td><td>Success</td></tr>'
             $('.reporttable').append(row);
             totalDiabeticsPatientsSeen = 0, totalDiabeticsPatientsSeenWihHba1c = 0;
         },
         warning: function (response) {
-            var row = '<tr onclick="displayValues(this,6);"><td>Diabetics with HBA1C in last 6 months</td><td>' + ounames[selectedou] + '</td><td>' + quarter + '</td><td>' + value + '</td><td>Warning</td></tr>'
+            var row = '<tr onclick="displayValues(this,6);"><td>Diabetics with HBA1C in last 6 months</td><td>' + ounames[selectedou] + '</td><td>Quarterly</td><td>' + quarter + '</td><td>' + value + '</td><td>Warning</td></tr>'
             $('.reporttable').append(row);
             console.log("Warning! for OU = " + selectedou + " and Period = " + quarter);
         },
         error: function (response) {
-            var row = '<tr onclick="displayValues(this,6);"><td>Diabetics with HBA1C in last 6 months</td><td>' + ounames[selectedou] + '</td><td>' + quarter + '</td><td>' + value + '</td><td>Error</td></tr>'
+            var row = '<tr onclick="displayValues(this,6);"><td>Diabetics with HBA1C in last 6 months</td><td>' + ounames[selectedou] + '</td><td>Quarterly</td><td>' + quarter + '</td><td>' + value + '</td><td>Error</td></tr>'
             $('.reporttable').append(row);
             console.log("ERROR for OU = " + selectedou + " and Period = " + quarter);
         }

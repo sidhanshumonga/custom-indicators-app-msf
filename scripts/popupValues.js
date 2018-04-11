@@ -3,12 +3,13 @@ var displayValues = function (param,reportIndex) {
     console.log(param);
     var indicator = param.children[0].innerHTML;
     var ou = param.children[1].innerHTML;
-    var period = param.children[2].innerHTML;
-    var values = param.children[3].innerHTML;
-    var status = param.children[4].innerHTML;
+    var type = param.children[2].innerHTML;
+    var period = param.children[3].innerHTML;
+    var values = param.children[4].innerHTML;
+    var status = param.children[5].innerHTML;
     var data = "<tr><td colspan='4'><b>" + indicator + "</b></td></tr>" +
-        "<tr><td colspan='2'><b>Organisation Unit</b></td><td><b>Period</b></td><td><b>Status</b></td></tr>" +
-        "<tr><td colspan='2'>" + ou + "</td><td>" + period + "</td><td>" + status + "</td></tr>" +
+        "<tr><td><b>Organisation Unit</b></td><td><b>Type</b></td><td><b>Period</b></td><td><b>Status</b></td></tr>" +
+        "<tr><td>" + ou + "</td><td>" + type + "</td><td>" + period + "</td><td>" + status + "</td></tr>" +
         "<tr><td colspan='2'><b>Data Elements Name</b></td><td colspan='2'><b>Values</b></td></tr>";
     var valuearray = values.split(',');
     for (var i = 0; i < valuearray.length; i++) {
@@ -41,6 +42,9 @@ var displayValues = function (param,reportIndex) {
         }
         else if(reportIndex == 10){
             data = data + "<tr><td colspan='2'>" + report10[i] + "</td><td colspan='2'>" + valuearray[i] + "</td></tr>"
+        }
+        else if(reportIndex == 11){
+            data = data + "<tr><td colspan='2'>" + report11[i] + "</td><td colspan='2'>" + valuearray[i] + "</td></tr>"
         }
         else{}
         }

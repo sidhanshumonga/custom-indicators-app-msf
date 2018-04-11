@@ -140,19 +140,19 @@ var pushfunctionR4 = function (value, quarter, selectedou) {
         data: JSON.stringify(dataValueSet),
         success: function (response) {
             console.log("values pushed for OU = " + selectedou + " and Period = " + quarter + "and value  = " + value);
-            var row = '<tr onclick="displayValues(this,5);"><td>Cv Statin</td><td>' + ounames[selectedou] + '</td><td>' + quarter + '</td><td>' + value + '</td><td>Success</td></tr>'
+            var row = '<tr onclick="displayValues(this,5);"><td>Cv Statin</td><td>' + ounames[selectedou] + '</td><td>Quarterly</td><td>' + quarter + '</td><td>' + value + '</td><td>Success</td></tr>'
             $('.reporttable').append(row);
             totalPatientsWithCV = 0, totalPatientsWithCVonStatin = 0;
         },
         warning: function (response) {
             console.log("Warning! for OU = " + selectedou + " and Period = " + quarter);
-            var row = '<tr onclick="displayValues(this,5);"><td>Cv Statin</td><td>' + ounames[selectedou] + '</td><td>' + quarter + '</td><td>' + value + '</td><td>Warning</td></tr>'
+            var row = '<tr onclick="displayValues(this,5);"><td>Cv Statin</td><td>' + ounames[selectedou] + '</td><td>Quarterly</td><td>' + quarter + '</td><td>' + value + '</td><td>Warning</td></tr>'
             $('.reporttable').append(row);
             totalPatientsWithCV = 0, totalPatientsWithCVonStatin = 0;
         },
         error: function (response) {
             console.log("ERROR for OU = " + selectedou + " and Period = " + quarter);
-            var row = '<tr onclick="displayValues(this,5);"><td>Cv Statin</td><td>' + ounames[selectedou] + '</td><td>' + quarter + '</td><td>' + value + '</td><td>Error</td></tr>'
+            var row = '<tr onclick="displayValues(this,5);"><td>Cv Statin</td><td>' + ounames[selectedou] + '</td><td>Quarterly</td><td>' + quarter + '</td><td>' + value + '</td><td>Error</td></tr>'
             $('.reporttable').append(row);
             totalPatientsWithCV = 0, totalPatientsWithCVonStatin = 0;
         }

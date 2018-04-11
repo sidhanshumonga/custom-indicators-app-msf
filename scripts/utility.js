@@ -127,7 +127,7 @@ var getMonthsPeriod = function (d) {
     var m = d.substring(5, 7);
     var y = d.substring(0, 4);
     var dd = d.substring(8, 10);
-    for (var i = 0; i < 6; i++) {
+    for (var i = 0; i < 12; i++) {
         array[i] = y + '-' + m + '-' + dd;
         m = m - 1;
         if (m < 1) {

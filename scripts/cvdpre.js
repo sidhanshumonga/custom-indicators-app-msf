@@ -149,19 +149,19 @@ var pushfunctionR5 = function (value, quarter, selectedou) {
         data: JSON.stringify(dataValueSet),
         success: function (response) {
             console.log("Successfully pushed for OU = " + selectedou + " and Period = " + quarter);
-            var row = '<tr onclick="displayValues(this,4);"><td>CVD Pre</td><td>' + ounames[selectedou] + '</td><td>' + quarter + '</td><td>' + value + '</td><td>Success</td></tr>'
+            var row = '<tr onclick="displayValues(this,4);"><td>CVD Pre</td><td>' + ounames[selectedou] + '</td><td>Quarterly</td><td>' + quarter + '</td><td>' + value + '</td><td>Success</td></tr>'
             $('.reporttable').append(row);
             htnDbActive = 0, htnDbTotal = 0, totalExit = 0, totalActive = 0, cerHtnDb12Total = 0, htnDbSeenTotal = 0;
         },
         warning: function (response) {
             console.log("Warning! for OU = " + selectedou + " and Period = " + quarter);
-            var row = '<tr onclick="displayValues(this,4);"><td>CVD Pre</td><td>' + ounames[selectedou] + '</td><td>' + quarter + '</td><td>' + value + '</td><td>Warning</td></tr>'
+            var row = '<tr onclick="displayValues(this,4);"><td>CVD Pre</td><td>' + ounames[selectedou] + '</td><td>Quarterly</td><td>' + quarter + '</td><td>' + value + '</td><td>Warning</td></tr>'
             $('.reporttable').append(row);
             htnDbActive = 0, htnDbTotal = 0, totalExit = 0, totalActive = 0, cerHtnDb12Total = 0, htnDbSeenTotal = 0;
         },
         error: function (response) {
             console.log("ERROR for OU = " + selectedou + " and Period = " + quarter);
-            var row = '<tr onclick="displayValues(this,4);"><td>CVD Pre</td><td>' + ounames[selectedou] + '</td><td>' + quarter + '</td><td>' + value + '</td><td>Error</td></tr>'
+            var row = '<tr onclick="displayValues(this,4);"><td>CVD Pre</td><td>' + ounames[selectedou] + '</td><td>Quarterly</td><td>' + quarter + '</td><td>' + value + '</td><td>Error</td></tr>'
             $('.reporttable').append(row);
             htnDbActive = 0, htnDbTotal = 0, totalExit = 0, totalActive = 0, cerHtnDb12Total = 0, htnDbSeenTotal = 0;
         }

@@ -4,6 +4,7 @@
 var teiEventsMap = [];
 var enrollmentsMapOuDate = [];
 var enrollmentsMapOuDate2 = [];
+var monthlyenrollmentsMapOuDate = [];
 var ounames = [];
 var ouids = [];
 var today = "2018-03-31";
@@ -78,6 +79,7 @@ var getLoopArray = function () {
                 loopArrayMonthly = getOuPeriodLoopMonthly(ouids, monthsPeriod);
                 //console.log(loopArrayQuarterly);
                 callingEnrollments(loopArrayQuarterly, 0);
+                callingEnrollmentsMonthly(loopArrayMonthly, 0);
                 callingEnrollmentsForLastYearDates(loopArrayQuarterly, lastYearLoopArrayQuarterly, 0);
             }
         }
@@ -170,3 +172,40 @@ var enrollmentLoopForLastYearDates = function (arrayly) {
     }
 };
 
+
+// calling enrollments monthly
+
+var callingEnrollmentsMonthly = function(array, j){
+    if (j >= array.length) {
+        // console.log(enrollmentsMapOuDate);
+        enrollmentLoopMonthly(monthlyenrollmentsMapOuDate);
+        //document.getElementById("loader").style.display = "none";
+    }
+    else {
+        loadingText = "loading enrollments from all Orgunits...";
+        displayText(loadingText);
+        var ou = array[j].split("/")[0];
+        var date = array[j].split("/")[1];
+        _getAllEnrollmentsOfOu(ou, date).then(function (data) {
+            monthlyenrollmentsMapOuDate[j] = [ou, date, data];
+            callingEnrollmentsMonthly(array, j + 1);
+        });
+    }
+};
+
+var enrollmentLoopMonthly = function(array){
+    for (var k = 0; k < array.length; k++) {
+        if (array[k][2].length != 0) {
+            var p = array[k][1];
+            var o = array[k][0];
+            var enrollments = array[k][2].enrollments;
+            loadingText = "calculating data of " + ounames[o] + "for period" + getQuarterToPush(p);
+            displayText(loadingText);
+            for (var h = 0; h < enrollments.length; h++) {
+                var tei = enrollments[h].trackedEntityInstance;
+                var events = teiEventsMap[tei];
+                insulindiabetics(events, h, enrollments.length, p, o);
+            }
+        }
+    }
+};

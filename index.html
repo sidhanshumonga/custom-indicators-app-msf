@@ -87,6 +87,9 @@
     <script type="text/javascript" src="scripts/htnControl.js"></script>
     <script type="text/javascript" src="scripts/activePatientsEnrolledLastYearSameQuarter.js"></script>
 
+    <!-- Monthly reports-->
+    <script type="text/javascript" src="scripts/insulinDiabetics.js"></script>
+
     <style>
         body {
             margin: auto;
@@ -103,7 +106,7 @@
         <br>
         <br>
         <center>
-            <button id='submit' class='btn btn-default' onclick='execute();'>submit</button>
+            <button id='submit' class='btn btn-default' onclick='execute();'>Submit</button>
         </center>
     </div>
     <div>
@@ -114,9 +117,10 @@
                 <tr>
                     <th>Indicator name</th>
                     <th>Orgunit name</th>
+                    <th>Type</th>
                     <th>Period</th>
-                    <th>value</th>
-                    <th>Push Status</th>
+                    <th>Value</th>
+                    <th>Push status</th>
                 </tr>
             </thead>
         </table>
