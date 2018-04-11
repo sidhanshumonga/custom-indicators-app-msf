@@ -129,8 +129,8 @@ var creatinineclear = function (events, aa, len, p, ou) {
                 if (aDate <= crtDate) {
                     var currentEventAttr2 = events[bb].dataValues;
                     for (var jk = 0; jk < currentEventAttr2.length; jk++) {
-                        if ((currentEventAttr[jk].dataElement == "yKw8AtDDVng") && curValA < 0 && curValCrt > 0) {
-                            curValA = parseInt(currentEventAttr[jk].value);
+                        if ((currentEventAttr2[jk].dataElement == "yKw8AtDDVng") && curValA < 0) {
+                            curValA = parseInt(currentEventAttr2[jk].value);
                         }
                     }
 
