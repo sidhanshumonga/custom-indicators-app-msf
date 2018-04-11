@@ -124,12 +124,12 @@ var activeandltfu = function (events, aa, len, p, ou) {
 
     if (aa >= len - 1) {
         var dbarray = [hasFollowup3mon, activetotal, LTFU6mon, LTFU12mon, activeatanyp];
-        pushfunctionR11(dbarray, getMonthToPush(p), ou);
+        pushfunctionR13(dbarray, getMonthToPush(p), ou);
     }
 
 };
 
-var pushfunctionR11 = function (value, month, selectedou) {
+var pushfunctionR13 = function (value, month, selectedou) {
     var dataValueSet = {
         "dataSet": "dKQvkruMnqN",
         "period": month,
