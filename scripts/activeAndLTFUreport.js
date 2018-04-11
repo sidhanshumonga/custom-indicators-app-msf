@@ -76,7 +76,7 @@ var activeandltfu = function (events, aa, len, p, ou) {
                     dateSixMonthsAgo.setMonth(dateSixMonthsAgo.getMonth() - 6);
                     dateTwelveMonthsAgo.setFullYear(dateTwelveMonthsAgo.getFullYear() - 1);
                     dateTwelveMonthsAgo.setDate(dateTwelveMonthsAgo.getDate() - 1);
-                    if (new Date(startdate) >= expireDate && expireDate >= predate) {
+                    if (new Date(startdate) >= latestEventDate && latestEventDate >= predate) {
                         count2 = 1;
                     }
 
