@@ -61,6 +61,20 @@ var _getAllEnrollmentsOfOu = function (ou, date) {
     return def;
 };
 
+var _getAllEnrollmentsOfOuWithSdEd = function (ou, sd, ed) {
+    var def = $.Deferred();
+    $.ajax({
+        type: "GET",
+        dataType: "json",
+        contentType: "application/json",
+        url: "../../enrollments.json?ou=" + ou + "&ouMode=DESCENDANTS&program=VCuHIFtJJSv&fields=trackedEntityInstance&skipPaging=true&programStartDate=" + sd + "&programEndDate=" + ed,
+        success: function (data) {
+            def.resolve(data);
+        }
+    });
+    return def;
+};
+
 var _getAllOus = function () {
     var def = $.Deferred();
     $.ajax({

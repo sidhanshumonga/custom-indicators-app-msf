@@ -144,11 +144,12 @@ var callingEnrollmentsForLastYearDates = function (array2, array, j) {
         displayText(loadingText);
         var ou = array[j].split("/")[0];
         var date = array[j].split("/")[1];
+        var sd = getQuarterStartDate(date);
 
         var ou2 = array2[j].split("/")[0];
         var date2 = array2[j].split("/")[1];
 
-        _getAllEnrollmentsOfOu(ou, date).then(function (data) {
+        _getAllEnrollmentsOfOuWithSdEd(ou, sd, date).then(function (data) {
             enrollmentsMapOuDate2[j] = [ou2, date2, data];
             callingEnrollmentsForLastYearDates(array2, array, j + 1);
         });
