@@ -25,6 +25,15 @@ window.onclick = function (event) {
         modal.style.display = "none";
     }
 }
+$(document).on('keyup',function(evt) {
+    if (evt.keyCode == 27) {
+        var modal = document.getElementById("myModal");
+        modal.style.display = "none";
+    }
+    if (evt.keyCode == 13) {
+        execute();
+    }
+});
 
 
 // finished
