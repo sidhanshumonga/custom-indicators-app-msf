@@ -5,7 +5,7 @@
 var hasFollowup3mon = 0, activeatendevent = 0, LTFU12mon = 0, LTFU6mon = 0, activeatanyp = 0, activetotal = 0, exitpatients = 0;
 
 
-var activeandltfu = function (events, aa, len, p, ou) {
+var activeandltfu = function (eventss, aa, len, p, ou) {
     var quarterToPush = getMonthToPush(p);
     var enddate = p;
     var startdate = getMonthStartDate(p);
@@ -18,8 +18,19 @@ var activeandltfu = function (events, aa, len, p, ou) {
     var firstVisit = [{ events: [] }];
     var predate = new Date(startdate);
     predate.setMonth(predate.getMonth() - 3);
+    var events = [];
+    var ec = 0;
+    if (eventss !== undefined && eventss.length != 0) {
 
-    if (events !== undefined && events.length != 0) {
+        for(var n = 0; n< eventss.length; n++){
+            var date = eventss[n].eventDate;
+            var first = date.split('T')[0];
+            var expireDate1 = new Date(first);
+            if(expireDate1 <= new Date(enddate)){
+                events[ec] = eventss[n];
+                ec++;
+            }
+        }
 
         //filter events in single call 
         for (var a = events.length - 1; a >= 0; a--) {

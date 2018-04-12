@@ -10,15 +10,27 @@ var type2LessThan8 = 0;
 var type2TotalHba1c = 0;
 
 
-var hba1cLessThan8 = function (events, aa, len, p, ou) {
+var hba1cLessThan8 = function (eventss, aa, len, p, ou) {
     var quarterToPush = getQuarterToPush(p);
     var enddate = p;
     var startdate = getQuarterStartDate(p);
     var active = false;
     var oneYearBeforeEndDate = new Date(enddate);
     oneYearBeforeEndDate.setFullYear(oneYearBeforeEndDate.getFullYear() - 1);
-    if (events !== undefined && events.length != 0) {
-        if (events[events.length - 1].programStage != 'Kr60c8j7vMe') {
+    var events = [];
+    var ec = 0;
+    if (eventss !== undefined && eventss.length != 0) {
+
+        for(var n = 0; n< eventss.length; n++){
+            var date = eventss[n].eventDate;
+            var first = date.split('T')[0];
+            var expireDate1 = new Date(first);
+            if(expireDate1 <= new Date(enddate)){
+                events[ec] = eventss[n];
+                ec++;
+            }
+        }
+        if (events[0].programStage != 'Kr60c8j7vMe') {
             active = true;
         }
 
@@ -37,7 +49,7 @@ var hba1cLessThan8 = function (events, aa, len, p, ou) {
             var valid = false;
 
 
-            for (var b = events.length - 1; b >= 0 && shouldContinue; b--) {
+            for (var b = 0; b < events.length && shouldContinue; b++) {
                 var date = events[b].eventDate;
                 var first = date.split('T')[0];
                 var eventDate = new Date(first);

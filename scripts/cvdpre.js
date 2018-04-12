@@ -7,7 +7,7 @@ var totalExit = 0, totalActive = 0;
 var cerHtnDb12Total = 0, htnDbSeenTotal = 0;
 
 
-var cvdprefunction = function (events, aa, len, p, ou) {
+var cvdprefunction = function (eventss, aa, len, p, ou) {
     var quarterToPush = getQuarterToPush(p);
 
     var enddate = p;
@@ -18,7 +18,19 @@ var cvdprefunction = function (events, aa, len, p, ou) {
     var htnanddbflag = false;
     var cer12flag = false;
     var htnDbSeenflag = false;
-    if (events !== undefined  && events.length != 0) {
+    var events = [];
+    var ec = 0;
+    if (eventss !== undefined && eventss.length != 0) {
+
+        for (var n = 0; n < eventss.length; n++) {
+            var date = eventss[n].eventDate;
+            var first = date.split('T')[0];
+            var expireDate1 = new Date(first);
+            if (expireDate1 <= new Date(enddate)) {
+                events[ec] = eventss[n];
+                ec++;
+            }
+        }
         if (events[events.length - 1].programStage == 'Kr60c8j7vMe') {
             var date = events[events.length - 1].eventDate;
             var first = date.split('T')[0];
@@ -41,7 +53,7 @@ var cvdprefunction = function (events, aa, len, p, ou) {
         if (events[events.length - 1].programStage == "Kr60c8j7vMe") { var pp = 1 }
         else { var pp = 0; }
 
-        for (var i = (events.length - 1) - pp; i >=0; i--) {
+        for (var i = (events.length - 1) - pp; i >= 0; i--) {
             var date = events[i].eventDate;
             var first = date.split('T')[0];
             var expireDate = new Date(first);
@@ -98,7 +110,7 @@ var cvdprefunction = function (events, aa, len, p, ou) {
 
 
     if (aa >= len - 1) {
-    htnDbActive = totalActive - totalExit;
+        htnDbActive = totalActive - totalExit;
         var dbarray = [htnDbTotal, cerHtnDb12Total, htnDbSeenTotal, htnDbActive];
         pushfunctionR5(dbarray, getQuarterToPush(p), ou);
     }

@@ -5,12 +5,24 @@
 var activeAtTheEndPAtients = 0;
 
 //first report -  need to be shift in another js
-var activeatendreport = function (events, a, len, p, ou) {
+var activeatendreport = function (eventss, a, len, p, ou) {
     var quarterToPush = getQuarterToPush(p);
 
     var enddate = p;
     var active = true;
-    if (events !== undefined && events.length != 0) {
+    var events = [];
+    var ec = 0;
+    if (eventss !== undefined && eventss.length != 0) {
+
+        for(var n = 0; n< eventss.length; n++){
+            var date = eventss[n].eventDate;
+            var first = date.split('T')[0];
+            var expireDate1 = new Date(first);
+            if(expireDate1 <= new Date(enddate)){
+                events[ec] = eventss[n];
+                ec++;
+            }
+        }
         //   console.log(events + ' ' + events.length);
         if (events[events.length - 1].programStage == 'Kr60c8j7vMe') {
             var date = events[events.length - 1].eventDate;

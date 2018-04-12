@@ -11,7 +11,7 @@ var totalHTNPatients12 = 0;
 var totalHTNPatients12withBP = 0;
 
 
-var htnmeds = function (events, aa, len, p, ou) {
+var htnmeds = function (eventss, aa, len, p, ou) {
     var quarterToPush = getQuarterToPush(p);
     var enddate = p;
     var startdate = getQuarterStartDate(p);
@@ -20,10 +20,24 @@ var htnmeds = function (events, aa, len, p, ou) {
     var medCounter = 0;
     var EventAttr = "";
     var sIndex = 0, totalF = 0;
+    var events = [];
+    var ec = 0;
+    if (eventss !== undefined && eventss.length != 0) {
 
-    if (events !== undefined && events.length != 0) {
-        if (events[events.length - 1].programStage == 'Kr60c8j7vMe') {
-            active = false;
+        for(var n = 0; n< eventss.length; n++){
+            var date = eventss[n].eventDate;
+            var first = date.split('T')[0];
+            var expireDate1 = new Date(first);
+            if(expireDate1 <= new Date(enddate)){
+                events[ec] = eventss[n];
+                ec++;
+            }
+        }
+
+        if (events[0].programStage == 'Kr60c8j7vMe') {
+           
+                active = false;
+            
         }
         var elementFound = false;
         var applicable = false;
@@ -33,13 +47,11 @@ var htnmeds = function (events, aa, len, p, ou) {
         var elemendsFoundDateYearBefore = null;
         var diagnosisAndMedicationGapMoreThanYear = false;
 
-        for (var b = events.length - 1; b >= 0; b--) {
+        for (var b = 0; b < events.length; b++) {
             //sIndex = b;
             var date = events[b].eventDate;
             var first = date.split('T')[0];
             var expireDate = new Date(first);
-            var enddateLastYear = new Date(enddate);
-            enddateLastYear.setFullYear(enddateLastYear.getFullYear() - 1);
 
             var currentEventAttr = events[b].dataValues;
             if (!elementFound) {
@@ -89,7 +101,7 @@ var htnmeds = function (events, aa, len, p, ou) {
         medCounter = 0;
         if (applicable) {
             var found = false;
-            for (var b = events.length - 1; b >= 0 && !found; b--) {
+            for (var b = 0; b < events.length && !found; b++) {
                 var currentEventAttr = events[b].dataValues;
                 for (var j = 0; j < currentEventAttr.length; j++) {
 
@@ -111,7 +123,7 @@ var htnmeds = function (events, aa, len, p, ou) {
         var bVal2 = 0;
         var diagnosedOneYearOlderThanLatestMedicine = false;
 
-        for (var b = 0; b < events.length && !expired && !valid; b++) {
+        for (var b = events.length - 1; b >= 0 && !expired && !valid; b--) {
             var date = events[b].eventDate;
             var first = date.split('T')[0];
             var eventDate = new Date(first);
@@ -158,6 +170,7 @@ var htnmeds = function (events, aa, len, p, ou) {
 
 
     if (aa >= len - 1) {
+        console.log(enddate + ' ' + startdate);
         var htnarray = [totalMedications, totalPatientsHTN, totalPatients1Medicine, totalPatients2Medicines, totalPatients3MedicinesMore, totalHTNPatients12, totalHTNPatients12withBP];
         pushfunctionR8(htnarray, getQuarterToPush(p), ou);
     }

@@ -5,7 +5,7 @@
 var   t1countn = 0, t2countn = 0, it1countn = 0, it1countp = 0, it2countn = 0, it2countp = 0;
 
 
-var insulindiabetics = function (events, aa, len, p, ou) {
+var insulindiabetics = function (eventss, aa, len, p, ou) {
     var quarterToPush = getMonthToPush(p);
     var enddate = p;
     var startdate = getMonthStartDate(p);
@@ -18,7 +18,19 @@ var insulindiabetics = function (events, aa, len, p, ou) {
     var temp = false;
 
 
-   if (events !== undefined && events.length != 0)  {
+    var events = [];
+    var ec = 0;
+    if (eventss !== undefined && eventss.length != 0) {
+
+        for(var n = 0; n< eventss.length; n++){
+            var date = eventss[n].eventDate;
+            var first = date.split('T')[0];
+            var expireDate1 = new Date(first);
+            if(expireDate1 <= new Date(enddate)){
+                events[ec] = eventss[n];
+                ec++;
+            }
+        }
         //search for diagnosis
         for (var b = 0; b < events.length; b++) {
                 var date = events[b].eventDate;

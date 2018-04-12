@@ -35,7 +35,7 @@ var getCrtValue = function (gender, curValA, curValCrt, curValW) {
 
 
 
-var creatinineclear = function (events, aa, len, p, ou) {
+var creatinineclear = function (eventss, aa, len, p, ou) {
     var quarterToPush = getQuarterToPush(p);
 
     var enddate = p;
@@ -43,20 +43,32 @@ var creatinineclear = function (events, aa, len, p, ou) {
     var active = false;
     var indexx = 0;
     var EventAttr = "";
-    if (events !== undefined && events.length != 0) {
+    var events = [];
+    var ec = 0;
+    if (eventss !== undefined && eventss.length != 0) {
 
-        if (events[events.length - 1].programStage == "Kr60c8j7vMe") {
-            var date = events[events.length - 1].eventDate;
+        for(var n = 0; n< eventss.length; n++){
+            var date = eventss[n].eventDate;
+            var first = date.split('T')[0];
+            var expireDate1 = new Date(first);
+            if(expireDate1 <= new Date(enddate)){
+                events[ec] = eventss[n];
+                ec++;
+            }
+        }
+
+        if (events[0].programStage == "Kr60c8j7vMe") {
+            var date = events[0].eventDate;
             var first = date.split('T')[0];
             var expireDate = new Date(first);
             if (expireDate > new Date(startdate)) {
                 active = true;
-                indexx = events.length - 2;
+                indexx = 1;
             }
         }
         else {
             active = true;
-            indexx = events.length - 1;
+            indexx = 0;
         }
     }
 
@@ -70,7 +82,7 @@ var creatinineclear = function (events, aa, len, p, ou) {
     var crtDate = "";
     var wDate = "";
     if (active) {
-        for (var b = indexx; b >= 0; b--) {
+        for (var b = indexx; b < events.length; b++) {
             var date = events[b].eventDate;
             var first = date.split('T')[0];
             var expireDate = new Date(first);
@@ -106,7 +118,7 @@ var creatinineclear = function (events, aa, len, p, ou) {
             }
         }
         if (wflag) {
-            for (var bb = indexx; bb >= 0; bb--) {
+            for (var bb = indexx; bb < events.length; bb++) {
                 var date = events[bb].eventDate;
                 var first = date.split('T')[0];
                 wDate = new Date(first);
@@ -122,7 +134,7 @@ var creatinineclear = function (events, aa, len, p, ou) {
             }
         }
         if (aflag) {
-            for (var bb = indexx; bb >= 0; bb--) {
+            for (var bb = indexx; bb < events.length; bb++) {
                 var date = events[bb].eventDate;
                 var first = date.split('T')[0];
                 var aDate = new Date(first);
@@ -139,7 +151,7 @@ var creatinineclear = function (events, aa, len, p, ou) {
         }
 
     }
-    if (curValCrt > 0 && wflag && curValW > 0 && curValA > 0 && applicable) {
+    if (curValCrt > 0 && wflag && curValW > 0 && applicable) {
         totalPatientsWithCRT++;
         var gender = getGender(tei);
         var crtvalue = getCrtValue(gender, curValA, curValCrt, curValW);

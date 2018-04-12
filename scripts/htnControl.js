@@ -8,7 +8,7 @@ var totalStage2Patients = 0;
 var totalStage3Patients = 0;
 
 
-var htncontrol = function (events, aa, len, p, ou) {
+var htncontrol = function (eventss, aa, len, p, ou) {
     var quarterToPush = getQuarterToPush(p);
     var enddate = p;
     var startdate = getQuarterStartDate(p);
@@ -16,7 +16,19 @@ var htncontrol = function (events, aa, len, p, ou) {
     var count = 0, count2 = 0, count22 = 0, count3 = 0, flag = 0;
     var stage1f = 0, stage2f = 0, stage3f = 0;
     var prestage1f = 0, prestage2f = 0, prestage3f = 0;
-    if (events !== undefined && events.length != 0) {
+    var events = [];
+    var ec = 0;
+    if (eventss !== undefined && eventss.length != 0) {
+
+        for(var n = 0; n< eventss.length; n++){
+            var date = eventss[n].eventDate;
+            var first = date.split('T')[0];
+            var expireDate1 = new Date(first);
+            if(expireDate1 <= new Date(enddate)){
+                events[ec] = eventss[n];
+                ec++;
+            }
+        }
        
             for (var b = 0; b < events.length; b++) {
                 var date = events[b].eventDate;
