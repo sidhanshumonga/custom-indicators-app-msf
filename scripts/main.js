@@ -1,7 +1,8 @@
 // created by Sidhanshu Monga
 // 2018-04-05
 
-var teiEventsMap = [];
+var teiEventsMapASC = [];
+var teiEventsMapDESC = [];
 var enrollmentsMapOuDate = [];
 var enrollmentsMapOuDate2 = [];
 var monthlyenrollmentsMapOuDate = [];
@@ -44,23 +45,45 @@ var execute = function () {
         document.getElementById("loadtext").innerHTML = loadingText;
         var i = 0;
         getHashMap(data.enrollments, i);
+    //    getHashMapDESC(data.enrollments, i);
     });
 };
 
 
 var getHashMap = function (enrollments, i) {
-    var tei = enrollments[i].trackedEntityInstance;
+    
     var perc = (i / (enrollments.length - 1)) * 100;
-    loadingText = (perc).toFixed(1) + "% data loaded! Please wait!";
+    loadingText = (perc).toFixed(1) + "% enrollments loaded.. please wait!";
     displayText(loadingText);
-    if (i >= enrollments.length - 1) {
+    if (i >= enrollments.length) {
+        getHashMapDESC(enrollments, 0);
+       // getLoopArray();
+    }
+    else {
+        var tei = enrollments[i].trackedEntityInstance;
+        _getAllEventsOfTei(tei).then(function (event) {
+            teiEventsMapASC[tei] = event.events;
+            // i++;
+            getHashMap(enrollments, i + 1);
+        });
+    }
+};
+
+
+var getHashMapDESC = function (enrollments, k) {
+  
+    var perc = (k / (enrollments.length - 1)) * 100;
+    loadingText = (perc).toFixed(1) + "% events loaded please wait!";
+    displayText(loadingText);
+    if (k >= enrollments.length) {
         getLoopArray();
     }
     else {
-        _getAllEventsOfTei(tei).then(function (event) {
-            teiEventsMap[tei] = event.events;
+        var tei = enrollments[k].trackedEntityInstance;
+        _getAllEventsOfTeiDESC(tei).then(function (event) {
+            teiEventsMapDESC[tei] = event.events;
             // i++;
-            getHashMap(enrollments, i + 1);
+            getHashMapDESC(enrollments, k + 1);
         });
     }
 };
@@ -98,9 +121,7 @@ var getLoopArray = function () {
 var callingEnrollments = function (array, j) {
 
     if (j >= array.length) {
-        // console.log(enrollmentsMapOuDate);
         enrollmentLoop(enrollmentsMapOuDate);
-      //  document.getElementById("loader").style.display = "none";
     }
     else {
         loadingText = "calculating values for quarterly indicators..";
@@ -120,20 +141,22 @@ var enrollmentLoop = function (array) {
             var p = array[k][1];
             var o = array[k][0];
             var enrollments = array[k][2].enrollments;
-            loadingText = "calculating data of " + ounames[o] + "for period" + getQuarterToPush(p);
-            displayText(loadingText);
+          
             for (var h = 0; h < enrollments.length; h++) {
                 var tei = enrollments[h].trackedEntityInstance;
-                var events = teiEventsMap[tei];
-                activeatendreport(events, h, enrollments.length, p, o);
-                creatinineclear(events, h, enrollments.length, p, o);
-                copdAndAsthama(events, h, enrollments.length, p, o);
-                cvstatin(events, h, enrollments.length, p, o);
-                cvdprefunction(events, h, enrollments.length, p, o);
-                dbWithHba1c(events, h, enrollments.length, p, o);
-                hba1cLessThan8(events, h, enrollments.length, p, o);
-                htnmeds(events, h, enrollments.length, p, o);
-                htncontrol(events, h, enrollments.length, p, o);
+              //  console.log(teiEventsMapASC);
+              //  console.log(teiEventsMapDESC);
+                var events = teiEventsMapASC[tei];
+                var eventsDESC = teiEventsMapDESC[tei];
+               activeatendreport(events, h, enrollments.length, p, o);
+               creatinineclear(eventsDESC, h, enrollments.length, p, o);
+                copdAndAsthama(eventsDESC, h, enrollments.length, p, o);
+               cvstatin(events, h, enrollments.length, p, o);
+               cvdprefunction(events, h, enrollments.length, p, o);
+               dbWithHba1c(events, h, enrollments.length, p, o);
+               hba1cLessThan8(eventsDESC, h, enrollments.length, p, o);
+                 htnmeds(eventsDESC, h, enrollments.length, p, o);
+               htncontrol(events, h, enrollments.length, p, o);
             }
         }
     }
@@ -175,8 +198,8 @@ var enrollmentLoopForLastYearDates = function (arrayly) {
             displayText(loadingText);
             for (var h = 0; h < enrollments.length; h++) {
                 var tei = enrollments[h].trackedEntityInstance;
-                var events = teiEventsMap[tei];
-                enrolledLastYearFunction(events, h, enrollments.length, p, o);
+                var events = teiEventsMapASC[tei];
+               enrolledLastYearFunction(events, h, enrollments.length, p, o);
             }
         }
     }
@@ -213,10 +236,10 @@ var enrollmentLoopMonthly = function(array){
             displayText(loadingText);
             for (var h = 0; h < enrollments.length; h++) {
                 var tei = enrollments[h].trackedEntityInstance;
-                var events = teiEventsMap[tei];
-                insulindiabetics(events, h, enrollments.length, p, o);
-                newdiagnosis(events, h, enrollments.length, p, o);
-                activeandltfu(events, h, enrollments.length, p, o);
+                var events = teiEventsMapASC[tei];
+               insulindiabetics(events, h, enrollments.length, p, o);
+               newdiagnosis(events, h, enrollments.length, p, o);
+               activeandltfu(events, h, enrollments.length, p, o);
             }
         }
     }
