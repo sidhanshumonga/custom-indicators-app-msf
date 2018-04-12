@@ -33,6 +33,20 @@ var _getAllEventsOfTei = function (tei) {
     return def;
 };
 
+var _getAllEventsOfTeiDESC = function (tei) {
+    var def = $.Deferred();
+    $.ajax({
+        type: "GET",
+        dataType: "json",
+        contentType: "application/json",
+        url: '../../events.json?skipPaging=true&program=VCuHIFtJJSv&order=eventDate:DESC&trackedEntityInstance=' + tei,
+        success: function (data) {
+            def.resolve(data);
+        }
+    });
+    return def;
+};
+
 var _getAllEnrollments = function () {
     var def = $.Deferred();
     $.ajax({
