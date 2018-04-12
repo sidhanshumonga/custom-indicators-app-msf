@@ -5,7 +5,7 @@
 var newDiagnosisedPatients = 0;
 
 
-var newdiagnosis = function (eventss, aa, len, pp, ou) {
+var newdiagnosis = function (eventsss, aa, len, pp, ou) {
     var quarterToPush = getMonthToPush(pp);
     var enddate = pp;
     var startdate = getMonthStartDate(pp);
@@ -19,14 +19,14 @@ var newdiagnosis = function (eventss, aa, len, pp, ou) {
     //filter events in single call 
     var events = [];
     var ec = 0;
-    if (eventss !== undefined && eventss.length != 0) {
+    if (eventsss !== undefined && eventsss.length != 0) {
 
-        for(var n = 0; n< eventss.length; n++){
-            var date = eventss[n].eventDate;
+        for(var n = 0; n< eventsss.length; n++){
+            var date = eventsss[n].eventDate;
             var first = date.split('T')[0];
             var expireDate1 = new Date(first);
             if(expireDate1 <= new Date(enddate)){
-                events[ec] = eventss[n];
+                events[ec] = eventsss[n];
                 ec++;
             }
         }
