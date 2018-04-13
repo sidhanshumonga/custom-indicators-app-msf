@@ -8,16 +8,16 @@ External app for dhis2, designed completely in JavaScript, HTML and CSS.
 
 - reports included are :
 
-COPDandAsthama
-HtnMedications
-activeAndLTFUreport
-activePatientsEnrolledLastYearSameQuarter
-activeatendreport
-creatinineClearance
-cvStatin
-cvdpre
-diabeticsWithHba1c
-hba1cLessThan8
-htnControl
-insulinDiabetics
-newDiagnosis
+COPDandAsthama,
+HtnMedications,
+activeAndLTFUreport,
+activePatientsEnrolledLastYearSameQuarter,
+activeatendreport,
+creatinineClearance,
+cvStatin,
+cvdpre,
+diabeticsWithHba1c,
+hba1cLessThan8,
+htnControl,
+insulinDiabetics,
+newDiagnosis.
