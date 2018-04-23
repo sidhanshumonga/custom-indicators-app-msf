@@ -23,15 +23,22 @@ var cvdprefunction = function (eventss, aa, len, p, ou) {
     if (eventss !== undefined && eventss.length != 0) {
 
         for (var n = 0; n < eventss.length; n++) {
-            var date = eventss[n].eventDate;
+           if(eventss[n].eventDate === undefined){
+				events[ec] = eventss[n];
+                ec++;
+			}
+			else{
+				var date = eventss[n].eventDate;
             var first = date.split('T')[0];
             var expireDate1 = new Date(first);
-            if (expireDate1 <= new Date(enddate)) {
+            if(expireDate1 <= new Date(enddate)){
                 events[ec] = eventss[n];
                 ec++;
             }
+			}
         }
         if (events[events.length - 1].programStage == 'Kr60c8j7vMe') {
+			if(events[events.length - 1].eventDate !== undefined){
             var date = events[events.length - 1].eventDate;
             var first = date.split('T')[0];
             var expireDate = new Date(first);
@@ -42,6 +49,7 @@ var cvdprefunction = function (eventss, aa, len, p, ou) {
                 exit = true;
                 // active = false;
             }
+		}
         }
         else {
             active = true;

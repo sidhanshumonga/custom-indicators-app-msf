@@ -11,12 +11,14 @@ var enrolledLastYearFunction = function (events, a, len, p, ou) {
     enrolledLastYear++;
     if (events !== undefined && events.length != 0) {
         if (events[events.length - 1].programStage == "Kr60c8j7vMe") {
+			if(events[events.length - 1].eventDate !== undefined){
             var date = events[events.length - 1].eventDate;
             var first = date.split('T')[0];
             var expireDate = new Date(first);
             if (new Date(enddate) < expireDate) {
                 activePatients++;
             }
+		}
         }
         else {
             activePatients++;

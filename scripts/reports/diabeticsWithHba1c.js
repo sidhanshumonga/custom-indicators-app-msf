@@ -21,13 +21,19 @@ var dbWithHba1c = function (eventss, aa, len, pp, ou) {
     if (eventss !== undefined && eventss.length != 0) {
 
         for (var n = 0; n < eventss.length; n++) {
-            var date = eventss[n].eventDate;
+           if(eventss[n].eventDate === undefined){
+				events[ec] = eventss[n];
+                ec++;
+			}
+			else{
+				var date = eventss[n].eventDate;
             var first = date.split('T')[0];
             var expireDate1 = new Date(first);
-            if (expireDate1 <= new Date(enddate)) {
+            if(expireDate1 <= new Date(enddate)){
                 events[ec] = eventss[n];
                 ec++;
             }
+			}
         }
         for (var a = 0; a < events.length; a++) {
             switch (events[a].programStage) {
@@ -55,6 +61,8 @@ var dbWithHba1c = function (eventss, aa, len, pp, ou) {
     }
     //else if (data1.httpStatusCode == 409 || data1.httpStatusCode == "409") { count = 0; }
     else {
+		
+		if(data1[0].events[0].eventDate !== undefined){
         var date = data1[0].events[0].eventDate;
         var first = date.split('T')[0];
         var expireDate = new Date(first);
@@ -62,6 +70,7 @@ var dbWithHba1c = function (eventss, aa, len, pp, ou) {
             count = 1; // though there is exit but the exit date is after reporting period 
             //still increase the count by 1
         }
+	}
     }
     if (data2[0].events.length == 0) {
         count2 = 0; //there is no follow up visits

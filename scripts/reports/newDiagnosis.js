@@ -54,7 +54,9 @@ var newdiagnosis = function (eventsR, aa, len, pp, ou) {
     var fvflag6 = 0, fvflag7 = 0, fvflag8 = 0, fvflag9 = 0, fvflag10 = 0;
     //var eventss = data2.events[0];
     //checking for values in first stage1
-
+	if(firstVisit[0].events[0] === undefined){
+		return;
+	}
     //      for (var i = 0; i < firstVisit[0].events.length; i++) {
     var eventss = firstVisit[0].events[0];
     for (var j = 0; j < eventss.dataValues.length; j++) {

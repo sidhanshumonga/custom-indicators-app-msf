@@ -23,16 +23,24 @@ var insulindiabetics = function (eventss, aa, len, p, ou) {
     if (eventss !== undefined && eventss.length != 0) {
 
         for(var n = 0; n< eventss.length; n++){
-            var date = eventss[n].eventDate;
+           if(eventss[n].eventDate === undefined){
+				events[ec] = eventss[n];
+                ec++;
+			}
+			else{
+				var date = eventss[n].eventDate;
             var first = date.split('T')[0];
             var expireDate1 = new Date(first);
             if(expireDate1 <= new Date(enddate)){
                 events[ec] = eventss[n];
                 ec++;
             }
+			}
         }
         //search for diagnosis
         for (var b = 0; b < events.length; b++) {
+			if(events[b].eventDate === undefined){return;}
+			else{
                 var date = events[b].eventDate;
                 var first = date.split('T')[0];
                 var expireDate = new Date(first);
@@ -40,7 +48,6 @@ var insulindiabetics = function (eventss, aa, len, p, ou) {
                 if(new Date(enddate) >= expireDate && expireDate >= new Date(startdate)){
                     visitMade = true;
                 }
-
                 var currentEventAttr = events[b].dataValues;
                 for (var j = 0; j < currentEventAttr.length ; j++) {
                     if ((currentEventAttr[j].dataElement == "lzBg6QalyhT" || currentEventAttr[j].dataElement == "rwDJebu16Fu") && (currentEventAttr[j].value == "Newly_diagnosed" || currentEventAttr[j].value == "Previously_diagnosed")) {
@@ -87,7 +94,7 @@ var insulindiabetics = function (eventss, aa, len, p, ou) {
                     //}
                 }
             }
-
+}
 
 
         if (visitMade) {

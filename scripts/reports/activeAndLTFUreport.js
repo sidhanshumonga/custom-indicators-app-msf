@@ -23,13 +23,19 @@ var activeandltfu = function (eventss, aa, len, p, ou) {
     if (eventss !== undefined && eventss.length != 0) {
 
         for(var n = 0; n< eventss.length; n++){
-            var date = eventss[n].eventDate;
+            if(eventss[n].eventDate === undefined){
+				events[ec] = eventss[n];
+                ec++;
+			}
+			else{
+				var date = eventss[n].eventDate;
             var first = date.split('T')[0];
             var expireDate1 = new Date(first);
             if(expireDate1 <= new Date(enddate)){
                 events[ec] = eventss[n];
                 ec++;
             }
+			}
         }
 
         //filter events in single call 
@@ -55,6 +61,7 @@ var activeandltfu = function (eventss, aa, len, p, ou) {
                 activeatanypoint = true;
             }
             else {
+				if(exitevents[0].events[0].eventDate !== undefined){
                 var date = exitevents[0].events[0].eventDate;
                 var first = date.split('T')[0];
                 var expireDate = new Date(first);
@@ -67,6 +74,7 @@ var activeandltfu = function (eventss, aa, len, p, ou) {
                 if (new Date(enddate) >= expireDate && expireDate >= new Date(startdate)) {
                     countExit = 1;
                 }
+			}
             }
 
         }

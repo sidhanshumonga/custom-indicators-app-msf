@@ -27,13 +27,19 @@ var copdAndAsthama = function (eventss, aa, len, p, ou) {
     if (eventss !== undefined && eventss.length != 0) {
 
         for(var n = 0; n< eventss.length; n++){
-            var date = eventss[n].eventDate;
+            if(eventss[n].eventDate === undefined){
+				events[ec] = eventss[n];
+                ec++;
+			}
+			else{
+				var date = eventss[n].eventDate;
             var first = date.split('T')[0];
             var expireDate1 = new Date(first);
             if(expireDate1 <= new Date(enddate)){
                 events[ec] = eventss[n];
                 ec++;
             }
+			}
         }
     for (var a = 0; a < events.length ; a++) {
         switch (events[a].programStage) {
@@ -47,12 +53,14 @@ var copdAndAsthama = function (eventss, aa, len, p, ou) {
 
             case "kwXu1zEDMEe"://first visit
                 //endDate="+getProperDate(mnthbeforeendDate)
+					if(events[a].eventDate !== undefined){
                 var date = events[a].eventDate;
                 var first = date.split('T')[0];
                 var eventDate = new Date(first);
                 if (eventDate <= mnthbeforeendDate) {
                     firstVisit[0].events.push(events[a]);
                 }
+					}
                 break;
         }
     }
@@ -62,6 +70,7 @@ var copdAndAsthama = function (eventss, aa, len, p, ou) {
     }
     //else if (exitevents.httpStatusCode == 409 || exitevents.httpStatusCode == "409") { count = 0; }
     else {
+			if(exitevents[0].events[0].eventDate !== undefined){
         var date = exitevents[0].events[0].eventDate;
         var first = date.split('T')[0];
         var expireDate = new Date(first);
@@ -69,6 +78,7 @@ var copdAndAsthama = function (eventss, aa, len, p, ou) {
             active = true; // though there is exit but the exit date is after reporting period 
             //still consider active
         }
+	}
     }
 
     var copdapplicable = false;
