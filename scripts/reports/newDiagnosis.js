@@ -133,6 +133,8 @@ var newdiagnosis = function (eventsR, aa, len, pp, ou) {
         var events = data1.events;
         var flag1 = 0, flag2 = 0, flag3 = 0, flag4 = 0, flag5 = 0, flag6 = 0, flag7 = 0, flag8 = 0, flag9 = 0, flag10 = 0, flag11 = 0;
         for (var i = 0; i < events.length; i++) {
+			if(events[i].eventDate === undefined){}
+			else{
             var date = events[i].eventDate;
             var first = date.split('T')[0];
             var expireDate = new Date(first);
@@ -260,6 +262,7 @@ var newdiagnosis = function (eventsR, aa, len, pp, ou) {
 
                 }
             }
+		}
         }
 
     }
