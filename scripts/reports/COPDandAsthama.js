@@ -28,8 +28,6 @@ var copdAndAsthama = function (eventss, aa, len, p, ou) {
 
         for(var n = 0; n< eventss.length; n++){
             if(eventss[n].eventDate === undefined){
-				events[ec] = eventss[n];
-                ec++;
 			}
 			else{
 				var date = eventss[n].eventDate;
@@ -123,6 +121,7 @@ var copdAndAsthama = function (eventss, aa, len, p, ou) {
             if (((!copdapplicable) || (!asthmaapplicable)) && followupvisits[0].events.length > 0) {
 
                 for (var i = followupvisits[0].events.length - 1; i > 0 && !(copdapplicable && asthmaapplicable); i--) {
+                    if(followupvisits[0].events[i].eventDate !== undefined){
                     var date = followupvisits[0].events[i].eventDate;
                     var first = date.split('T')[0];
                     var evDate = new Date(first);
@@ -149,6 +148,7 @@ var copdAndAsthama = function (eventss, aa, len, p, ou) {
                         break;
                     }
                 }
+                }
             }
         }
 
@@ -164,6 +164,7 @@ var copdAndAsthama = function (eventss, aa, len, p, ou) {
         var flowback = true;
         //if(followupvisits[0].events.length>0){
         for (var j = 0; j < followupvisits[0].events.length && flowback; j++) {
+            if(followupvisits[0].events[j].eventDate !== undefined){
             var date = followupvisits[0].events[j].eventDate;
             var first = date.split('T')[0];
             var evDate = new Date(first);
@@ -216,7 +217,7 @@ var copdAndAsthama = function (eventss, aa, len, p, ou) {
             } else {
                 flowback = false; // no element found within the period
             }
-
+        }
         }
 
     }

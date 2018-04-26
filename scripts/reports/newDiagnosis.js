@@ -21,15 +21,6 @@ var newdiagnosis = function (eventsR, aa, len, pp, ou) {
     var ec = 0;
     if (eventsR !== undefined && eventsR.length != 0) {
 
-        // for(var n = 0; n< eventsss.length; n++){
-        //     var date = eventsss[n].eventDate;
-        //     var first = date.split('T')[0];
-        //     var expireDate1 = new Date(first);
-        //     if(expireDate1 <= new Date(enddate)){
-        //         eventsR[ec] = eventsss[n];
-        //         ec++;
-        //     }
-        // }
         for (var a = 0; a < eventsR.length; a++) {
             switch (eventsR[a].programStage) {
                 case "Kr60c8j7vMe"://exit

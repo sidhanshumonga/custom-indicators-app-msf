@@ -16,8 +16,6 @@ var activeatendreport = function (eventss, a, len, p, ou) {
 
         for(var n = 0; n< eventss.length; n++){
 			if(eventss[n].eventDate === undefined){
-				events[ec] = eventss[n];
-                ec++;
 			}
 			else{
 				var date = eventss[n].eventDate;
@@ -30,6 +28,7 @@ var activeatendreport = function (eventss, a, len, p, ou) {
 			}
         }
         //   console.log(events + ' ' + events.length);
+        if(events[events.length - 1] !== undefined){
         if (events[events.length - 1].programStage == 'Kr60c8j7vMe') {
 				if(events[events.length - 1].eventDate !== undefined){
 		var date = events[events.length - 1].eventDate;
@@ -41,6 +40,7 @@ var activeatendreport = function (eventss, a, len, p, ou) {
             }
 		}
         }else{}
+    }
     }
 
 

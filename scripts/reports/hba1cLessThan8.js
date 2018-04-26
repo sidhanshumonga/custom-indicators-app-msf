@@ -23,8 +23,7 @@ var hba1cLessThan8 = function (eventss, aa, len, p, ou) {
 
         for(var n = 0; n< eventss.length; n++){
             if(eventss[n].eventDate === undefined){
-				events[ec] = eventss[n];
-                ec++;
+				
 			}
 			else{
 				var date = eventss[n].eventDate;
@@ -36,9 +35,11 @@ var hba1cLessThan8 = function (eventss, aa, len, p, ou) {
             }
 			}
         }
+        if(events[0] !==  undefined){
         if (events[0].programStage != 'Kr60c8j7vMe') {
             active = true;
         }
+    }
 
         if (events.length > 0 && active) {
             var hba1cval = -1;
@@ -56,6 +57,7 @@ var hba1cLessThan8 = function (eventss, aa, len, p, ou) {
 
 
             for (var b = 0; b < events.length && shouldContinue; b++) {
+                if(events[b].eventDate !== undefined){
                 var date = events[b].eventDate;
                 var first = date.split('T')[0];
                 var eventDate = new Date(first);
@@ -100,7 +102,7 @@ var hba1cLessThan8 = function (eventss, aa, len, p, ou) {
                         shouldContinue = false;
                     }
                 }
-
+            }
 
             }
 

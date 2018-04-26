@@ -24,8 +24,7 @@ var insulindiabetics = function (eventss, aa, len, p, ou) {
 
         for(var n = 0; n< eventss.length; n++){
            if(eventss[n].eventDate === undefined){
-				events[ec] = eventss[n];
-                ec++;
+				
 			}
 			else{
 				var date = eventss[n].eventDate;
@@ -39,7 +38,7 @@ var insulindiabetics = function (eventss, aa, len, p, ou) {
         }
         //search for diagnosis
         for (var b = 0; b < events.length; b++) {
-			if(events[b].eventDate === undefined){return;}
+			if(events[b].eventDate === undefined){}
 			else{
                 var date = events[b].eventDate;
                 var first = date.split('T')[0];

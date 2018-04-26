@@ -49,8 +49,6 @@ var creatinineclear = function (eventss, aa, len, p, ou) {
 
         for(var n = 0; n< eventss.length; n++){
             if(eventss[n].eventDate === undefined){
-				events[ec] = eventss[n];
-                ec++;
 			}
 			else{
 				var date = eventss[n].eventDate;
@@ -62,7 +60,7 @@ var creatinineclear = function (eventss, aa, len, p, ou) {
             }
 			}
         }
-
+if(events[0] !==  undefined){
         if (events[0].programStage == "Kr60c8j7vMe") {
 			if(events[0].eventDate !== undefined){
             var date = events[0].eventDate;
@@ -79,6 +77,7 @@ var creatinineclear = function (eventss, aa, len, p, ou) {
             indexx = 0;
         }
     }
+    }
 
     var elementFound = false;
     var applicable = false;
@@ -89,8 +88,10 @@ var creatinineclear = function (eventss, aa, len, p, ou) {
     var aflag = false;
     var crtDate = "";
     var wDate = "";
+    var currentEventAttr22 ="";
     if (active) {
         for (var b = indexx; b < events.length; b++) {
+            if(events[b].eventDate !== undefined){
             var date = events[b].eventDate;
             var first = date.split('T')[0];
             var expireDate = new Date(first);
@@ -114,52 +115,56 @@ var creatinineclear = function (eventss, aa, len, p, ou) {
                     var date = events[b].eventDate;
                     var first = date.split('T')[0];
                     crtDate = new Date(first);
+                    currentEventAttr22 = currentEventAttr;
                 }
                 if ((currentEventAttr[j].dataElement == "Pp1cKHJWH2W" || currentEventAttr[j].dataElement == "rKi92UQ4XmX") && curValW < 0) {
                     wflag = true;
+                    curValW = parseInt(currentEventAttr[j].value);
                 }
 
-                if ((currentEventAttr[j].dataElement == "yKw8AtDDVng") && curValA < 0 && curValCrt > 0) {
+                if ((currentEventAttr[j].dataElement == "yKw8AtDDVng") ) {
                     aflag = true;
+                    
                 }
 
             }
         }
-        if (wflag) {
-            for (var bb = indexx; bb < events.length; bb++) {
-                var date = events[bb].eventDate;
-                var first = date.split('T')[0];
-                wDate = new Date(first);
-                if (wDate <= crtDate) {
-                    var currentEventAttr2 = events[bb].dataValues;
-                    for (var jk = 0; jk < currentEventAttr2.length; jk++) {
-                        if ((currentEventAttr2[jk].dataElement == "Pp1cKHJWH2W" || currentEventAttr2[jk].dataElement == "rKi92UQ4XmX") && curValW < 0) {
-                            curValW = parseInt(currentEventAttr2[jk].value);
-                        }
-                    }
-
-                }
-            }
         }
+        // if (wflag) {
+        //     for (var bb = 0; bb < events.length; bb++) {
+        //         var date = events[bb].eventDate;
+        //         var first = date.split('T')[0];
+        //         wDate = new Date(first);
+        //         if (wDate <= crtDate) {
+        //             var currentEventAttr2 = events[bb].dataValues;
+        //             for (var jk = 0; jk < currentEventAttr2.length; jk++) {
+        //                 if ((currentEventAttr2[jk].dataElement == "Pp1cKHJWH2W" || currentEventAttr2[jk].dataElement == "rKi92UQ4XmX") && curValW < 0) {
+        //                     curValW = parseInt(currentEventAttr2[jk].value);
+        //                 }
+        //             }
+
+        //         }
+        //     }
+        // }
         if (aflag) {
-            for (var bb = indexx; bb < events.length; bb++) {
-                var date = events[bb].eventDate;
-                var first = date.split('T')[0];
-                var aDate = new Date(first);
-                if (aDate <= crtDate) {
-                    var currentEventAttr2 = events[bb].dataValues;
+            // for (var bb = 0; bb < events.length; bb++) {
+            //     var date = events[bb].eventDate;
+            //     var first = date.split('T')[0];
+            //     var aDate = new Date(first);
+            //     if (aDate == crtDate) {
+                    var currentEventAttr2 = eventss[0].dataValues;
                     for (var jk = 0; jk < currentEventAttr2.length; jk++) {
                         if ((currentEventAttr2[jk].dataElement == "yKw8AtDDVng") && curValA < 0) {
                             curValA = parseInt(currentEventAttr2[jk].value);
                         }
                     }
 
-                }
-            }
+            //     }
+            // }
         }
 
     }
-    if (curValCrt > 0 && wflag && curValW > 0 && applicable) {
+    if (curValCrt > 0 && curValW > 0 && applicable) {
         totalPatientsWithCRT++;
         var gender = getGender(tei);
         var crtvalue = getCrtValue(gender, curValA, curValCrt, curValW);

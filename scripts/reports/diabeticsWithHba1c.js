@@ -22,8 +22,7 @@ var dbWithHba1c = function (eventss, aa, len, pp, ou) {
 
         for (var n = 0; n < eventss.length; n++) {
            if(eventss[n].eventDate === undefined){
-				events[ec] = eventss[n];
-                ec++;
+			
 			}
 			else{
 				var date = eventss[n].eventDate;
@@ -79,6 +78,7 @@ var dbWithHba1c = function (eventss, aa, len, pp, ou) {
     else {
         //if there is folow up visit
         for (var b = 0; b < data2[0].events.length; b++) {
+            if(data2[0].events[b].eventDate !== undefined){
             var date = data2[0].events[b].eventDate;
             var first = date.split('T')[0];
             var expireDate = new Date(first);
@@ -95,10 +95,12 @@ var dbWithHba1c = function (eventss, aa, len, pp, ou) {
                 }
             }
         }
+        }
 
 
         if (flag == 1) {
             for (var b = 0; b < data2[0].events.length; b++) {
+                if(data2[0].events[b].eventDate !== undefined){
                 var date = data2[0].events[b].eventDate;
                 var first = date.split('T')[0];
                 var expireDate = new Date(first);
@@ -121,6 +123,7 @@ var dbWithHba1c = function (eventss, aa, len, pp, ou) {
                     }
                 }
             }
+            }
         }
     }
 
@@ -130,6 +133,7 @@ var dbWithHba1c = function (eventss, aa, len, pp, ou) {
     else if (data22.httpStatusCode == 409 || data22.httpStatusCode == "409") { count2 = 0; }
     else {
         for (var b = 0; b < data22[0].events.length; b++) {
+            if(data22[0].events[b].eventDate !== undefined){
             var date = data22[0].events[b].eventDate;
             var first = date.split('T')[0];
             var expireDate = new Date(first);
@@ -145,9 +149,11 @@ var dbWithHba1c = function (eventss, aa, len, pp, ou) {
                 }
             }
         }
+        }
 
         if (flag == 1) {
             for (var b = 0; b < data22[0].events.length; b++) {
+                if(data22[0].events[b].eventDate !== undefined){
                 var date = data22[0].events[b].eventDate;
                 var first = date.split('T')[0];
                 var expireDate = new Date(first);
@@ -168,6 +174,7 @@ var dbWithHba1c = function (eventss, aa, len, pp, ou) {
                         }
                     }
                 }
+            }
             }
         }
     }

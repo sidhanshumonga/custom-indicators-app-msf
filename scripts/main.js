@@ -111,8 +111,8 @@ var getLoopArray = function () {
                 loopArrayMonthly = getOuPeriodLoopMonthly(ouids, monthsPeriod);
                 //console.log(loopArrayQuarterly);
                 callingEnrollments(loopArrayQuarterly, 0);
-                callingEnrollmentsMonthly(loopArrayMonthly, 0);
-                callingEnrollmentsForLastYearDates(loopArrayQuarterly, lastYearLoopArrayQuarterly, 0);
+                setTimeout(callingEnrollmentsMonthly(loopArrayMonthly, 0),6000);
+                setTimeout(callingEnrollmentsForLastYearDates(loopArrayQuarterly, lastYearLoopArrayQuarterly, 0),10000);
             }
         }
     });

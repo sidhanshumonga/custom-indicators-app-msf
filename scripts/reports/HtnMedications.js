@@ -26,8 +26,6 @@ var htnmeds = function (eventss, aa, len, p, ou) {
 
         for(var n = 0; n< eventss.length; n++){
            if(eventss[n].eventDate === undefined){
-				events[ec] = eventss[n];
-                ec++;
 			}
 			else{
 				var date = eventss[n].eventDate;
@@ -39,12 +37,13 @@ var htnmeds = function (eventss, aa, len, p, ou) {
             }
 			}
         }
-
+        if(events[0] !==  undefined){
         if (events[0].programStage == 'Kr60c8j7vMe') {
            
                 active = false;
             
         }
+    }
         var elementFound = false;
         var applicable = false;
         var df1 = false, df2 = false;
@@ -54,6 +53,8 @@ var htnmeds = function (eventss, aa, len, p, ou) {
         var diagnosisAndMedicationGapMoreThanYear = false;
 
         for (var b = 0; b < events.length; b++) {
+
+            if(events[b].eventDate !== undefined){
             //sIndex = b;
             var date = events[b].eventDate;
             var first = date.split('T')[0];
@@ -101,7 +102,7 @@ var htnmeds = function (eventss, aa, len, p, ou) {
                 }
 
             }
-
+        }
 
         }
         medCounter = 0;
@@ -130,6 +131,7 @@ var htnmeds = function (eventss, aa, len, p, ou) {
         var diagnosedOneYearOlderThanLatestMedicine = false;
 
         for (var b = events.length - 1; b >= 0 && !expired && !valid; b--) {
+            if(events[b].eventDate !== undefined){
             var date = events[b].eventDate;
             var first = date.split('T')[0];
             var eventDate = new Date(first);
@@ -156,7 +158,7 @@ var htnmeds = function (eventss, aa, len, p, ou) {
             } else {
                 expired = true;
             }
-
+        }
         }
     }
 

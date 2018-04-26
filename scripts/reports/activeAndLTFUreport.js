@@ -24,8 +24,7 @@ var activeandltfu = function (eventss, aa, len, p, ou) {
 
         for(var n = 0; n< eventss.length; n++){
             if(eventss[n].eventDate === undefined){
-				events[ec] = eventss[n];
-                ec++;
+				
 			}
 			else{
 				var date = eventss[n].eventDate;
@@ -85,7 +84,8 @@ var activeandltfu = function (eventss, aa, len, p, ou) {
              else {
 
                 if (count == 1) {
-
+                    if(followupvisits[0].events[0].eventDate === undefined){}
+                    else{
                     var date = followupvisits[0].events[0].eventDate;
                     var first = date.split('T')[0];
                     var latestEventDate = new Date(first);
@@ -111,7 +111,7 @@ var activeandltfu = function (eventss, aa, len, p, ou) {
                     else {
                         count4 = 0;
                     }
-
+                }
 
                 }
             }

@@ -19,8 +19,7 @@ var cvstatin = function (eventss, aa, len, p, ou) {
 
         for(var n = 0; n< eventss.length; n++){
            if(eventss[n].eventDate === undefined){
-				events[ec] = eventss[n];
-                ec++;
+			
 			}
 			else{
 				var date = eventss[n].eventDate;

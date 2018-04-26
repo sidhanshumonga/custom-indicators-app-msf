@@ -24,8 +24,7 @@ var cvdprefunction = function (eventss, aa, len, p, ou) {
 
         for (var n = 0; n < eventss.length; n++) {
            if(eventss[n].eventDate === undefined){
-				events[ec] = eventss[n];
-                ec++;
+				
 			}
 			else{
 				var date = eventss[n].eventDate;
@@ -37,6 +36,7 @@ var cvdprefunction = function (eventss, aa, len, p, ou) {
             }
 			}
         }
+        if(events[events.length - 1] !==  undefined){
         if (events[events.length - 1].programStage == 'Kr60c8j7vMe') {
 			if(events[events.length - 1].eventDate !== undefined){
             var date = events[events.length - 1].eventDate;
@@ -55,6 +55,7 @@ var cvdprefunction = function (eventss, aa, len, p, ou) {
             active = true;
         }
     }
+    }
 
     if (active) {
         var flag = 0;
@@ -62,6 +63,7 @@ var cvdprefunction = function (eventss, aa, len, p, ou) {
         else { var pp = 0; }
 
         for (var i = (events.length - 1) - pp; i >= 0; i--) {
+            if(events[i].eventDate !== undefined){
             var date = events[i].eventDate;
             var first = date.split('T')[0];
             var expireDate = new Date(first);
@@ -104,7 +106,7 @@ var cvdprefunction = function (eventss, aa, len, p, ou) {
                     }
                 }
             }
-
+        }
         }
 
     }

@@ -22,8 +22,7 @@ var htncontrol = function (eventss, aa, len, p, ou) {
 
         for(var n = 0; n< eventss.length; n++){
           if(eventss[n].eventDate === undefined){
-				events[ec] = eventss[n];
-                ec++;
+				
 			}
 			else{
 				var date = eventss[n].eventDate;
@@ -37,6 +36,8 @@ var htncontrol = function (eventss, aa, len, p, ou) {
         }
        
             for (var b = 0; b < events.length; b++) {
+
+                if(events[b].eventDate !== undefined){
                 var date = events[b].eventDate;
                 var first = date.split('T')[0];
                 var expireDate = new Date(first);
@@ -86,6 +87,7 @@ var htncontrol = function (eventss, aa, len, p, ou) {
                         }
                     }
                 }
+            }
             }
     
     }
