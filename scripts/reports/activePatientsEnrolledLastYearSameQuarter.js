@@ -41,14 +41,14 @@ var pushfunctionR10 = function (value, quarter, selectedou) {
             "categoryOptionCombo": "HllvX50cXC0",
             "period": quarter,
             "orgUnit": selectedou,
-            "value": value[1]
+            "value": value[0]
         },
         {
             "dataElement": "F7t4bgi4mYl",
             "categoryOptionCombo": "HllvX50cXC0",
             "period": quarter,
             "orgUnit": selectedou,
-            "value": value[0]
+            "value": value[1]
         }]
     };
 
