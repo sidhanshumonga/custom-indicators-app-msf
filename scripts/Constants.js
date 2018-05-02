@@ -68,14 +68,28 @@ var med17 = "Valsartan 80mg (Diovan)";
 var med18 = "Bisoprolol hemifumarate 10 mg";
 var med19 = "Losartan potassium 50 mg";
 var med20 = "Captopril 50 mg/hct 25 mg";
+var med21 = "Indapamide-1.5 mg";
+var med22 = "Spironolactone-25mg";
+var med23 = "Telmisartan/Hydrochlorothiazide";
+var med24 = "Diltiazem-60 mg";
+var med25 = "Telmisartan-80 mg";
+var med26 = "Hydrochlorothiazide-100 mg";
+var med27 = "Losartan-50 mg";
+var med28 = "Propranolol-40 mg";
+var med29 = "Nifedipine-20 mg";
+var med30 = "Verapamil hydrochloride-80mg";
+var med31 = "Telmisartan-40 mg";
+var med32 = "Losartan-100mg";
 
 
 var medications = [med1, med2, med3, med4, med5, med6, med7, med8, med9,
-    med10, med11, med12, med13, med14, med15, med16, med17, med18, med19, med20];
+    med10, med11, med12, med13, med14, med15, med16, med17, med18, med19, med20, med21, med22, med23, med24, med25, med26, med27, med28, med29,
+    med30, med31, med32];
 
 var medDataElements1 =
     ["nQ32sHUnPKv", "e4RAOrfr6Oz", "JiMkzWDtYwL", "SSHzwRe5rWG", "QGddWBd4WGw", "bHdzWTNZvM3", "gTL8HOgeCq2", "TzdFTRlnjeC", "oQIMNkobUke", "CEP72QOx3GW", "Uza0ZnZ1XxV", "Lmo1tDeH2r8",
-        "wd9KkclB1dg", "IMvy9x1Xuo9", "E60ikhXksxo", "TGu4kRLXmru", "JDTlrMsHXke", "FTNyHVtzOcy", "XAsWYJD5mRD", "hOEQiwt21Hj", "qtWD2pOQmFk", "SVIpRhaadFs", "D9PrDVUMtmB", "mvBYfc9pMF2"];
+        "wd9KkclB1dg", "IMvy9x1Xuo9", "E60ikhXksxo", "TGu4kRLXmru", "JDTlrMsHXke", "FTNyHVtzOcy", "XAsWYJD5mRD", "hOEQiwt21Hj", "qtWD2pOQmFk", "SVIpRhaadFs", "D9PrDVUMtmB", "mvBYfc9pMF2",
+    "ArPq6EPL3aI","AwNvduIlRsA","C2TfORhHDDU","dVlfEbgLd3b","F6K4pNOCBWE","HkBhvj7LGYk","ingpvWNWwQg","iW2irglilem","j1S89e7IvvW","k24SAk2vEWx","mT0TEvdzUz3","n1hzIerKJ61"];
 
 // arrays for displaying values in popup
 
